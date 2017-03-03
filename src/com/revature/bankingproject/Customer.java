@@ -111,8 +111,12 @@ public class Customer {
 	public String login(String username, String password) {
 		String success = "test";// whether the login was successful
 		String line;
+		
+		//these two booleans used for checking validity of login
 		boolean usernameFound = false;
 		boolean passwordMatch = false;
+		
+		boolean usernameFoundOnce = false;//keep track if username was found at all
 		String tempCustomerId = "";
 		String realCustomerId = "";
 
@@ -125,6 +129,8 @@ public class Customer {
 
 			// loop through every line in the file to check for username
 			while ((line = br.readLine()) != null) {
+				usernameFound = false;
+				passwordMatch = false;
 				
 				int location = 0;
 				int colonCount = 0;// switch variable to see how many colon you've seen
@@ -160,6 +166,7 @@ public class Customer {
 							// if username is in file mark boolean
 							if (username.equals(currentUserName)) {
 								usernameFound = true;
+								usernameFoundOnce = true;//just to check if username was found at all
 							}
 						}
 
@@ -179,9 +186,9 @@ public class Customer {
 					break;//break while loop once logged in
 				}
 			}
-			if (!usernameFound) {// if username boolean still false, no username match found
+			if (!usernameFoundOnce) {// if username boolean still false, no username match found
 				return "Username not found.";
-			} else if (usernameFound) {// if username found, check password
+			} else if (usernameFoundOnce) {// if username found, check password
 				if (!passwordMatch) {
 					return "Password incorrect.";
 				} else {
