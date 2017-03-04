@@ -3,6 +3,7 @@ package com.revature.bankingproject;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
 
 public class Main {
 	public static void main(String[] args) {
@@ -169,9 +170,10 @@ public class Main {
 				break;
 			case 3:
 				Customer viewAccounts = new Customer();
-				String viewAccountsResult;
+				ArrayList<String> viewAccountsResult;
 				viewAccountsResult = viewAccounts.getAccountsForCustomer(customerId);
-				System.out.println(viewAccountsResult);
+				System.out.println(viewAccountsResult.get(0) + ": " + viewAccountsResult.get(1));
+				System.out.println(viewAccountsResult.get(2) + ": " + viewAccountsResult.get(3));
 				break;
 			default:
 				System.out.println("Not a valid option");

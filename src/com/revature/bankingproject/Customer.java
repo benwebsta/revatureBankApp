@@ -5,6 +5,7 @@ import java.io.BufferedWriter;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.ArrayList;
 
 public class Customer {
 
@@ -203,17 +204,185 @@ public class Customer {
 		return success;
 	}
 
+	/**
+	 * 
+	 * @param customerId the foreign key id to associate with in the database
+	 * @return String the result of the savings account application
+	 */
 	public String signUpForSavingsAccount(int customerId){
-		
-		return "signed up for savings account";
+		String success = " ";
+		int balance = 0;
+		boolean valid = false;
+		try (BufferedReader br = new BufferedReader(new FileReader(
+				"C:\\Users\\Ben\\Documents\\workspace-sts-3.8.3.RELEASE\\BankingProject\\src\\com\\revature\\bankingproject\\Data.txt"));
+				BufferedWriter bw = new BufferedWriter(new FileWriter(
+						"C:\\Users\\Ben\\Documents\\workspace-sts-3.8.3.RELEASE\\BankingProject\\src\\com\\revature\\bankingproject\\Data.txt",
+						true))) {
+			
+			// add savings account to the database
+			bw.write("savings:" + customerId + ":" + valid + ":" + balance);
+			bw.newLine();
+			success = "Applied for Savings Account!";
+			
+		}
+		 catch (IOException e) {
+				success = "Unable to create account.";
+				System.out.println("IO Exception");
+				success = "IO Exception";
+			} catch (Exception e) {
+				success = "Unable to create account.";
+				System.out.println("General Exception");
+				success = "General Exception";
+			}
+		return success;
 	}
 	
+	/**
+	 * 
+	 * @param customerId the foreign key id to associate with in the database
+	 * @return String the result of the checking account application
+	 */
 	public String signUpForCheckingAccount(int customerId){
+		String success = " ";
+		String line = "";
+		int balance = 0;
+		int tempCustomerId;
+		boolean checkingAccountExists = false;
 		
-		return "signed up for checking account";
+		boolean valid = false;
+		try (BufferedReader br = new BufferedReader(new FileReader(
+				"C:\\Users\\Ben\\Documents\\workspace-sts-3.8.3.RELEASE\\BankingProject\\src\\com\\revature\\bankingproject\\Data.txt"));
+				BufferedWriter bw = new BufferedWriter(new FileWriter(
+						"C:\\Users\\Ben\\Documents\\workspace-sts-3.8.3.RELEASE\\BankingProject\\src\\com\\revature\\bankingproject\\Data.txt",
+						true))) {
+			
+			while ((line = br.readLine()) != null) {
+				tempCustomerId = 0;
+				
+				int location = 0;
+				int colonCount = 0;// switch variable to see how many colon you've seen
+				String dataType = "";
+
+				// loop through every character in the line, check for username match
+				for (int i = 0; i < line.length(); i++) {
+
+					// when we find a colon or end of line, there is a word
+					if (line.charAt(i) == ':' || i == line.length() - 1) {
+						colonCount++;// increment colon every time we find a word
+
+						// get the type of data on that line
+						if (colonCount == 1) {
+							dataType = line.substring(location, i);
+							// if it is not a correct data type in data file break
+							if (!(dataType.equals("checking"))) {
+								break;
+							}
+						}
+						
+						if(colonCount == 2)
+							tempCustomerId = Integer.parseInt(line.substring(location, i));
+						
+						if(dataType.equals("checking") && tempCustomerId == customerId)
+							checkingAccountExists = true;
+
+						location = i + 1;
+					}
+				}
+			}
+			if(!checkingAccountExists){
+				// add checking account to the database
+				bw.write("checking:" + customerId + ":" + valid + ":" + balance);
+				bw.newLine();
+				success = "Applied for Checking Account!";
+			}
+			else{
+				success = "Checking Account already exists";
+			}
+			
+		}
+		 catch (IOException e) {
+				success = "Unable to create account.";
+				System.out.println("IO Exception");
+				success = "IO Exception";
+			} catch (Exception e) {
+				success = "Unable to create account.";
+				System.out.println("General Exception");
+				success = "General Exception";
+			}
+		return success;
 	}
 	
-	public String getAccountsForCustomer(int customerId){
-		return "all accounts";
+	/**
+	 * 
+	 * @param customerId the foreign key id to associate with in the database
+	 * @return Arraylist of accounts represented as strings
+	 */
+	public ArrayList<String> getAccountsForCustomer(int customerId){
+		//arraylist to store accounts
+		ArrayList<String> accounts = new ArrayList<String>();
+		String line;
+		int tempCustomerId;
+		
+		boolean accountFound = false;//keep track if account was found at all
+
+		// open reader and writer for data file
+		try (BufferedReader br = new BufferedReader(new FileReader(
+				"C:\\Users\\Ben\\Documents\\workspace-sts-3.8.3.RELEASE\\BankingProject\\src\\com\\revature\\bankingproject\\Data.txt"));
+				BufferedWriter bw = new BufferedWriter(new FileWriter(
+						"C:\\Users\\Ben\\Documents\\workspace-sts-3.8.3.RELEASE\\BankingProject\\src\\com\\revature\\bankingproject\\Data.txt",
+						true))) {
+
+			// loop through every line in the file to check for checking or savings account
+			while ((line = br.readLine()) != null) {
+				tempCustomerId = 0;
+				
+				int location = 0;
+				int colonCount = 0;// switch variable to see how many colon you've seen
+				String dataType = "";
+
+				// loop through every character in the line, check for username match
+				for (int i = 0; i < line.length(); i++) {
+
+					// when we find a colon or end of line, there is a word
+					if (line.charAt(i) == ':' || i == line.length() - 1) {
+						colonCount++;// increment colon every time we find a word
+
+						// get the type of data on that line
+						if (colonCount == 1) {
+							dataType = line.substring(location, i);
+							// if it is not a correct data type in data file break
+							if (!(dataType.equals("savings")) && !(dataType.equals("checking"))) {
+								break;
+							}
+						}
+						
+						if(colonCount == 2)
+							tempCustomerId = Integer.parseInt(line.substring(location, i));
+						
+						int acccountBalance = 0;//temp accountBalance 0
+						if(colonCount == 4)
+							//get real account balance
+							acccountBalance = Integer.parseInt(line.substring(location, i + 1));
+						
+						if (colonCount == 4 && tempCustomerId == customerId) {
+							accountFound = true;//found an account 
+							//add the account to the arraylist to return
+							accounts.add(dataType);
+							accounts.add("$" + Integer.toString(acccountBalance));
+						}
+
+						location = i + 1;
+					}
+				}
+			}
+			if(!accountFound)
+				System.out.println("No Accounts Found");
+		} catch (IOException e) {
+			System.out.println("IO Exception");
+		} catch (Exception e) {
+			System.out.println("General Exception");
+		}
+
+		return accounts;
 	}
 }
