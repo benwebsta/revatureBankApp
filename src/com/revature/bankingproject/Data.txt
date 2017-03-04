@@ -5,7 +5,7 @@ checking:1237641879:true:1210:-287807177
 customer:3556498:test:test
 customer:-1392640279:benweb:password123
 customer:2047724685:newaccount:password
-savings:1237641879:true:500:-287807177
+savings:1237641879:true:800:-287807177
 customer:-1154382429:jonlee:pass:-287807177
 savings:-1154382429:true:0:-287807177
 customer:-542574309:morysabitch:pass:-287807177

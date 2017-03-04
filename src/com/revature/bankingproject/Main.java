@@ -20,7 +20,7 @@ public class Main {
 			switch (response) {
 			case 1:
 				//presents options for creating account
-				String createAccountResult = createAccountOption(sc);
+				String createAccountResult = createCustomerAccountOption(sc);
 				
 				System.out.println(createAccountResult);
 				if(!(createAccountResult.equals("Account created successfully!"))){
@@ -30,17 +30,17 @@ public class Main {
 					int loginResult = 0;
 					
 					while(loginResult == 0){
-						loginResult = loginOption(sc);
+						loginResult = customerLoginOption(sc);
 					}
-					loginOption(sc);
+					customerLoginOption(sc);
 				}
 				break;
 			case 2:
 				int loginResult = 0;
 				
 				while(loginResult == 0)
-					loginResult = loginOption(sc);
-				loggedInMenu(loginResult, sc);
+					loginResult = customerLoginOption(sc);
+				customerLoggedInMenu(loginResult, sc);
 				break;
 			case 3:
 				System.out.println("Employee Login");
@@ -81,7 +81,7 @@ public class Main {
 	 * @param sc input scanner to read user input
 	 * @return String the result of signing up for an account
 	 */
-	public static String createAccountOption(BufferedReader sc){
+	public static String createCustomerAccountOption(BufferedReader sc){
 		String username = "";
 		String password = "";
 		try
@@ -112,7 +112,7 @@ public class Main {
 	 * @param sc
 	 * @return
 	 */
-	public static int loginOption(BufferedReader sc){
+	public static int customerLoginOption(BufferedReader sc){
 		int customerLoggedInId = 0;
 		
 		try{
@@ -163,7 +163,7 @@ public class Main {
 	/**
 	 * Presents menu for logged in customer
 	 */
-	public static void loggedInMenuOption(){
+	public static void customerLoggedInMenuOption(){
 		//Menu for logged in customer
 		System.out.println("Welcome to your account");
 		System.out.println("----------------------");
@@ -178,8 +178,8 @@ public class Main {
 	 * @param customerId the foreing key for the account
 	 * @param sc input scanner
 	 */
-	public static void loggedInMenu(int customerId, BufferedReader sc){
-		loggedInMenuOption();
+	public static void customerLoggedInMenu(int customerId, BufferedReader sc){
+		customerLoggedInMenuOption();
 		
 		try{
 			int response = Integer.parseInt(sc.readLine());
