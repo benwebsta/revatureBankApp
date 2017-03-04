@@ -1,7 +1,6 @@
-customer:1237641879:benwebsta:password
-customer:-287807365:benwebsta2:password
-customer:-1422454080:testact:password
-customer:3357545:mory:pass
-customer:-674916816:highscore:password123
-customer:105417:jon:jon
-customer:3267977:jon2:pass
+customer:1237641879:benwebsta:password123
+customer:-287807364:benwebsta3:password
+customer:-287807177:benwebster:pass
+customer:3556498:test:test
+customer:-1392640279:benweb:password123
+customer:2047724685:newaccount:password

@@ -8,8 +8,7 @@ import java.io.IOException;
 
 public class Customer {
 
-	int customerId;// customerId for uniqueness
-	String userName, passWord;
+	private int customerId;// customerId for uniqueness
 
 	/**
 	 * 
@@ -25,10 +24,8 @@ public class Customer {
 		String success;// whether the sign up was successful
 
 		// assign instance variables to the input from main
-		this.userName = username;
 		this.customerId = username.hashCode();
-		this.passWord = password;
-
+		
 		// open reader and writer for data file
 		try (BufferedReader br = new BufferedReader(new FileReader(
 				"C:\\Users\\Ben\\Documents\\workspace-sts-3.8.3.RELEASE\\BankingProject\\src\\com\\revature\\bankingproject\\Data.txt"));
@@ -204,5 +201,19 @@ public class Customer {
 		}
 
 		return success;
+	}
+
+	public String signUpForSavingsAccount(int customerId){
+		
+		return "signed up for savings account";
+	}
+	
+	public String signUpForCheckingAccount(int customerId){
+		
+		return "signed up for checking account";
+	}
+	
+	public String getAccountsForCustomer(int customerId){
+		return "all accounts";
 	}
 }
