@@ -386,6 +386,14 @@ public class Customer {
 		return accounts;
 	}
 
+	/**
+	 * Add money to the specified accounts balance
+	 * 
+	 * @param customerId foreign key for customer account
+	 * @param accountType savings or checking
+	 * @param amount of money to add to balance
+	 * @return the new balance total
+	 */
 	public int depositMoney(int customerId, String accountType, int amount){
 		int currBalance = 0;
 		try (BufferedReader br = new BufferedReader(new FileReader(
@@ -397,7 +405,6 @@ public class Customer {
 			String oldText = "";
 			
 			int tempCustomerId;
-			int permCustomerId;
 			int prevBalance = 0;
 			while ((line = br.readLine()) != null) {
 				oldText += line + "\r\n";
@@ -428,7 +435,6 @@ public class Customer {
 						
 						//get the balance and add to it
 						if(dataType.equals(accountType) && tempCustomerId == customerId && colonCount == 4){
-							permCustomerId = customerId;
 							prevBalance = Integer.parseInt(line.substring(location, i + 1));
 							currBalance = Integer.parseInt(line.substring(location, i + 1));
 							currBalance += amount;
@@ -457,6 +463,14 @@ public class Customer {
 		return currBalance;
 	}
 		
+	/**
+	 * Remove money to the specified accounts balance
+	 * 
+	 * @param customerId foreign key for customer account
+	 * @param accountType savings or checking
+	 * @param amount of money to add to balance
+	 * @return the new balance total
+	 */
 	public int withdrawMoney(int customerId, String accountType, int amount){
 		int currBalance = 0;
 		try (BufferedReader br = new BufferedReader(new FileReader(
@@ -468,7 +482,6 @@ public class Customer {
 			String oldText = "";
 			
 			int tempCustomerId;
-			int permCustomerId;
 			int prevBalance = 0;
 			while ((line = br.readLine()) != null) {
 				oldText += line + "\r\n";
@@ -499,7 +512,6 @@ public class Customer {
 						
 						//get the balance and add to it
 						if(dataType.equals(accountType) && tempCustomerId == customerId && colonCount == 4){
-							permCustomerId = customerId;
 							prevBalance = Integer.parseInt(line.substring(location, i + 1));
 							currBalance = Integer.parseInt(line.substring(location, i + 1));
 							currBalance -= amount;

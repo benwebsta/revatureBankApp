@@ -58,6 +58,9 @@ public class Main {
 		}
 	}
 	
+	/**
+	 * Presents main menu option
+	 */
 	public static void menuOption(){
 		//Menu for banking program
 		System.out.println("Enter a number option");
@@ -66,22 +69,17 @@ public class Main {
 		System.out.println("2: Customer Login");
 		System.out.println("3: Employee Login");
 		System.out.println("4: Admin Login");
-		
 	}
 	
-	public static void loggedInMenuOption(){
-		//Menu for logged in customer
-		System.out.println("Welcome to your account");
-		System.out.println("----------------------");
-		System.out.println("1: Sign up for Savings Acccount");
-		System.out.println("2: Sign up for Checking Account");
-		System.out.println("3: View Accounts");
-	}
-	
+	/**
+	 * Tries to create a customer account, returns the result
+	 * 
+	 * @param sc input scanner to read user input
+	 * @return String the result of signing up for an account
+	 */
 	public static String createAccountOption(BufferedReader sc){
-		String username = "test";
-		String password = "test";
-		
+		String username = "";
+		String password = "";
 		try
 		{
 			System.out.println("Customer Sign Up Page");
@@ -98,11 +96,18 @@ public class Main {
 			System.out.println(e);
 		}
 		
+		//call sign up method from Customer class
 		Customer createCustomer = new Customer();
 		String createAccountResult = createCustomer.signUpForServices(username, password);
 		return createAccountResult;
 	}
 	
+	/**
+	 * Tries to login with username and password input
+	 * 
+	 * @param sc
+	 * @return
+	 */
 	public static int loginOption(BufferedReader sc){
 		int customerLoggedInId = 0;
 		
@@ -113,6 +118,7 @@ public class Main {
 			System.out.println("Enter password: ");
 			password = sc.readLine();
 			
+			//tries to login with username and password input
 			Customer loginCustomer = new Customer();
 			String loginResult = loginCustomer.login(username, password);
 			
@@ -150,6 +156,24 @@ public class Main {
 		
 	}
 	
+	/**
+	 * Presents menu for logged in customer
+	 */
+	public static void loggedInMenuOption(){
+		//Menu for logged in customer
+		System.out.println("Welcome to your account");
+		System.out.println("----------------------");
+		System.out.println("1: Sign up for Savings Acccount");
+		System.out.println("2: Sign up for Checking Account");
+		System.out.println("3: View Accounts");
+	}
+
+	/**
+	 * Deals with customer logged in menu input
+	 * 
+	 * @param customerId the foreing key for the account
+	 * @param sc input scanner
+	 */
 	public static void loggedInMenu(int customerId, BufferedReader sc){
 		loggedInMenuOption();
 		
@@ -157,19 +181,19 @@ public class Main {
 			int response = Integer.parseInt(sc.readLine());
 			
 			switch(response){
-			case 1:
+			case 1://create savings
 				Customer createSavingsAccount = new Customer();
 				String createSavingsAccountResult;
 				createSavingsAccountResult = createSavingsAccount.signUpForSavingsAccount(customerId);
 				System.out.println(createSavingsAccountResult);
 				break;
-			case 2:
+			case 2://create checking
 				Customer createCheckingAccount = new Customer();
 				String createCheckingAccountResult;
 				createCheckingAccountResult = createCheckingAccount.signUpForCheckingAccount(customerId);
 				System.out.println(createCheckingAccountResult);
 				break;
-			case 3:
+			case 3://view accounts
 				Customer viewAccounts = new Customer();
 				ArrayList<String> viewAccountsResult;
 				viewAccountsResult = viewAccounts.getAccountsForCustomer(customerId);
@@ -199,9 +223,9 @@ public class Main {
 					}	
 				}
 				accountType = sc.readLine();
-				if(accountType.equals("1"))
+				if(accountType.equals("1"))//1 for savings
 					accountType = "savings";
-				else if (accountType.equals("2"))
+				else if (accountType.equals("2"))//2 for checking
 					accountType = "checking";
 				
 				int manageBalance = 0;
@@ -210,6 +234,7 @@ public class Main {
 				System.out.println("1: Deposit");
 				System.out.println("2: Withraw");
 				
+				//deposit or withdraw option
 				manageBalance = Integer.parseInt(sc.readLine());
 				if(manageBalance == 1)
 					depositMoney(customerId, sc, accountType);
@@ -235,6 +260,12 @@ public class Main {
 		
 	}
 	
+	/**
+	 * Deposit money into account type specified in loggedinmenu
+	 * @param customerId foreign key for customer account
+	 * @param sc input scanner 
+	 * @param accountType savings or checking picked by customer
+	 */
 	public static void depositMoney(int customerId, BufferedReader sc, String accountType){
 		Customer depositMoney = new Customer();
 		int amount = 0;
@@ -248,9 +279,15 @@ public class Main {
 		}
 		
 		int newBalance = depositMoney.depositMoney(customerId, accountType, amount);
-		System.out.println("New Balance: " + newBalance);
+		System.out.println("New Balance: $" + newBalance);
 	}
-
+	
+	/**
+	 * Withdraw money from account type specified in logginmenu
+	 * @param customerId foreign key for customer account
+	 * @param sc input scanner
+	 * @param accountType savings or checking picked by customer
+	 */
 	public static void withdrawMoney(int customerId, BufferedReader sc, String accountType){
 		Customer withdrawMoney = new Customer();
 		int amount = 0;
@@ -264,6 +301,6 @@ public class Main {
 		}
 		
 		int newBalance = withdrawMoney.withdrawMoney(customerId, accountType, amount);
-		System.out.println("New Balance: " + newBalance);
+		System.out.println("New Balance: $" + newBalance);
 	}
 }
