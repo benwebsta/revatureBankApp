@@ -30,7 +30,7 @@ public class Main {
 					while(loginResult == 0){
 						loginResult = loginOption(sc);
 					}
-					System.out.println(loginResult);
+					loginOption(sc);
 				}
 				break;
 			case 2:
@@ -71,7 +71,7 @@ public class Main {
 	
 	public static void loggedInMenuOption(){
 		//Menu for logged in customer
-		System.out.println("Enter a number option");
+		System.out.println("Welcome to your account");
 		System.out.println("----------------------");
 		System.out.println("1: Sign up for Savings Acccount");
 		System.out.println("2: Sign up for Checking Account");
@@ -172,8 +172,15 @@ public class Main {
 				Customer viewAccounts = new Customer();
 				ArrayList<String> viewAccountsResult;
 				viewAccountsResult = viewAccounts.getAccountsForCustomer(customerId);
-				System.out.println(viewAccountsResult.get(0) + ": " + viewAccountsResult.get(1));
-				System.out.println(viewAccountsResult.get(2) + ": " + viewAccountsResult.get(3));
+				//2 accounts
+				if(viewAccountsResult.size() == 4){
+					System.out.println(viewAccountsResult.get(0) + ": " + viewAccountsResult.get(1));
+					System.out.println(viewAccountsResult.get(2) + ": " + viewAccountsResult.get(3));
+				}
+				// 1 account
+				else if(viewAccountsResult.size() == 2){
+					System.out.println(viewAccountsResult.get(0) + ": " + viewAccountsResult.get(1));
+				}
 				break;
 			default:
 				System.out.println("Not a valid option");

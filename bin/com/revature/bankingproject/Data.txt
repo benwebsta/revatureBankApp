@@ -7,3 +7,5 @@ customer:-1392640279:benweb:password123
 customer:2047724685:newaccount:password
 savings:1237641879:false:356
 
+customer:-1154382429:jonlee:pass
+savings:-1154382429:false:0
