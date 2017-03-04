@@ -1,11 +1,11 @@
 customer:1237641879:benwebsta:password123
 customer:-287807364:benwebsta3:password
 customer:-287807177:benwebster:pass
-checking:1237641879:false:1000
+checking:1237641879:true:1000
 customer:3556498:test:test
 customer:-1392640279:benweb:password123
 customer:2047724685:newaccount:password
-savings:1237641879:false:356
+savings:1237641879:true:526
 
 customer:-1154382429:jonlee:pass
-savings:-1154382429:false:0
+savings:-1154382429:true:0

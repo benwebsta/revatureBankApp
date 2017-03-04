@@ -203,7 +203,21 @@ public class Main {
 					accountType = "savings";
 				else if (accountType.equals("2"))
 					accountType = "checking";
-				int depositMoney = depositMoney(customerId, sc, accountType);
+				
+				int manageBalance = 0;
+				
+				System.out.println("Do you want to deposit or withdraw?");
+				System.out.println("1: Deposit");
+				System.out.println("2: Withraw");
+				
+				manageBalance = Integer.parseInt(sc.readLine());
+				if(manageBalance == 1)
+					depositMoney(customerId, sc, accountType);
+				else if(manageBalance == 2)
+					System.out.println("Withdraw menu");
+				else
+					System.out.println("not a correct option");
+				
 				
 				break;
 			default:
@@ -223,7 +237,17 @@ public class Main {
 	
 	public static int depositMoney(int customerId, BufferedReader sc, String accountType){
 		Customer depositMoney = new Customer();
-		depositMoney.depositMoney(customerId, accountType, 100);
+		int amount = 0;
+		
+		try{
+			System.out.println("How much money do you want to deposit?");
+			amount = Integer.parseInt(sc.readLine());
+		}
+		catch(IOException e){
+			System.out.println("IO Exception");
+		}
+		
+		depositMoney.depositMoney(customerId, accountType, amount);
 		return 0;
 	}
 }
