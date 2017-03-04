@@ -385,4 +385,26 @@ public class Customer {
 
 		return accounts;
 	}
+
+	public int depositMoney(int customerId, String accountType, int amount){
+		try (BufferedReader br = new BufferedReader(new FileReader(
+				"C:\\Users\\Ben\\Documents\\workspace-sts-3.8.3.RELEASE\\BankingProject\\src\\com\\revature\\bankingproject\\Data.txt"));
+				BufferedWriter bw = new BufferedWriter(new FileWriter(
+						"C:\\Users\\Ben\\Documents\\workspace-sts-3.8.3.RELEASE\\BankingProject\\src\\com\\revature\\bankingproject\\Data.txt",
+						true))) {
+			String line = "";
+			String oldText = "";
+			while((line = br.readLine()) != null){
+				oldText += line + "\r\n";
+			}
+			System.out.println(oldText);
+		}
+		 catch (IOException e) {
+			System.out.println("IO Exception");
+		} catch (Exception e) {
+			System.out.println("General Exception");
+		}
+		
+		return 0;
+	}
 }

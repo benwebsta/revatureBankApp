@@ -149,6 +149,7 @@ public class Main {
 		return customerLoggedInId;
 		
 	}
+	
 	public static void loggedInMenu(int customerId, BufferedReader sc){
 		loggedInMenuOption();
 		
@@ -172,15 +173,38 @@ public class Main {
 				Customer viewAccounts = new Customer();
 				ArrayList<String> viewAccountsResult;
 				viewAccountsResult = viewAccounts.getAccountsForCustomer(customerId);
+				
+				String accountType;
 				//2 accounts
 				if(viewAccountsResult.size() == 4){
-					System.out.println(viewAccountsResult.get(0) + ": " + viewAccountsResult.get(1));
-					System.out.println(viewAccountsResult.get(2) + ": " + viewAccountsResult.get(3));
+					System.out.println("Enter account to access:");
+					//savings account is option 1
+					if(viewAccountsResult.get(0).equals("savings")){
+						System.out.println("1: " + viewAccountsResult.get(0) + ": " + viewAccountsResult.get(1));				
+						System.out.println("2: " + viewAccountsResult.get(2) + ": " + viewAccountsResult.get(3));
+					}
+					else{
+						System.out.println("1: " + viewAccountsResult.get(2) + ": " + viewAccountsResult.get(3));
+						System.out.println("2: " + viewAccountsResult.get(0) + ": " + viewAccountsResult.get(1));
+					}
 				}
 				// 1 account
 				else if(viewAccountsResult.size() == 2){
-					System.out.println(viewAccountsResult.get(0) + ": " + viewAccountsResult.get(1));
+					System.out.println("Enter account to access:");
+					if(viewAccountsResult.get(0).equals("savings")){
+						System.out.println("1: " + viewAccountsResult.get(0) + ": " + viewAccountsResult.get(1));
+					}
+					else{
+						System.out.println("2: " + viewAccountsResult.get(0) + ": " + viewAccountsResult.get(1));
+					}	
 				}
+				accountType = sc.readLine();
+				if(accountType.equals("1"))
+					accountType = "savings";
+				else if (accountType.equals("2"))
+					accountType = "checking";
+				int depositMoney = depositMoney(customerId, sc, accountType);
+				
 				break;
 			default:
 				System.out.println("Not a valid option");
@@ -197,4 +221,9 @@ public class Main {
 		
 	}
 	
+	public static int depositMoney(int customerId, BufferedReader sc, String accountType){
+		Customer depositMoney = new Customer();
+		depositMoney.depositMoney(customerId, accountType, 100);
+		return 0;
+	}
 }
