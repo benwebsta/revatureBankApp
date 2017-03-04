@@ -387,6 +387,7 @@ public class Customer {
 	}
 
 	public int depositMoney(int customerId, String accountType, int amount){
+		int currBalance = 0;
 		try (BufferedReader br = new BufferedReader(new FileReader(
 				"C:\\Users\\Ben\\Documents\\workspace-sts-3.8.3.RELEASE\\BankingProject\\src\\com\\revature\\bankingproject\\Data.txt"));
 				BufferedWriter bw = new BufferedWriter(new FileWriter(
@@ -397,7 +398,6 @@ public class Customer {
 			
 			int tempCustomerId;
 			int permCustomerId;
-			int currBalance = 0;
 			int prevBalance = 0;
 			while ((line = br.readLine()) != null) {
 				oldText += line + "\r\n";
@@ -439,10 +439,8 @@ public class Customer {
 					}
 				}
 			}
-			System.out.println(oldText);
 			String newText = oldText.replaceAll(accountType + ":" + customerId + ":" + "true" + ":" + prevBalance, 
 								accountType + ":" + customerId + ":" + "true" + ":" + currBalance);
-			System.out.println(newText);
 			
 			BufferedWriter bw2 = new BufferedWriter(new FileWriter(
 					"C:\\Users\\Ben\\Documents\\workspace-sts-3.8.3.RELEASE\\BankingProject\\src\\com\\revature\\bankingproject\\Data.txt"));
@@ -456,6 +454,77 @@ public class Customer {
 			System.out.println("General Exception");
 		}
 		
-		return 0;
+		return currBalance;
+	}
+		
+	public int withdrawMoney(int customerId, String accountType, int amount){
+		int currBalance = 0;
+		try (BufferedReader br = new BufferedReader(new FileReader(
+				"C:\\Users\\Ben\\Documents\\workspace-sts-3.8.3.RELEASE\\BankingProject\\src\\com\\revature\\bankingproject\\Data.txt"));
+				BufferedWriter bw = new BufferedWriter(new FileWriter(
+						"C:\\Users\\Ben\\Documents\\workspace-sts-3.8.3.RELEASE\\BankingProject\\src\\com\\revature\\bankingproject\\Data.txt",
+						true))) {
+			String line = "";
+			String oldText = "";
+			
+			int tempCustomerId;
+			int permCustomerId;
+			int prevBalance = 0;
+			while ((line = br.readLine()) != null) {
+				oldText += line + "\r\n";
+				tempCustomerId = 0;
+
+				int location = 0;
+				int colonCount = 0;// switch variable to see how many colon you've seen
+				String dataType = "";
+
+				// loop through every character in the line, check for username match
+				for (int i = 0; i < line.length(); i++) {
+
+					// when we find a colon or end of line, there is a word
+					if (line.charAt(i) == ':' || i == line.length() - 1) {
+						colonCount++;// increment colon every time we find a word
+
+						// get the type of data on that line
+						if (colonCount == 1) {
+							dataType = line.substring(location, i);
+							// if it is not a correct data type in data file break
+							if (!(dataType.equals(accountType))) {
+								break;
+							}
+						}
+						
+						if(colonCount == 2)
+							tempCustomerId = Integer.parseInt(line.substring(location, i));
+						
+						//get the balance and add to it
+						if(dataType.equals(accountType) && tempCustomerId == customerId && colonCount == 4){
+							permCustomerId = customerId;
+							prevBalance = Integer.parseInt(line.substring(location, i + 1));
+							currBalance = Integer.parseInt(line.substring(location, i + 1));
+							currBalance -= amount;
+						}
+							
+
+						location = i + 1;
+					}
+				}
+			}
+			String newText = oldText.replaceAll(accountType + ":" + customerId + ":" + "true" + ":" + prevBalance, 
+								accountType + ":" + customerId + ":" + "true" + ":" + currBalance);
+			
+			BufferedWriter bw2 = new BufferedWriter(new FileWriter(
+					"C:\\Users\\Ben\\Documents\\workspace-sts-3.8.3.RELEASE\\BankingProject\\src\\com\\revature\\bankingproject\\Data.txt"));
+			bw2.write(newText);
+			bw2.close();
+			
+		}
+		 catch (IOException e) {
+			System.out.println("IO Exception");
+		} catch (Exception e) {
+			System.out.println("General Exception");
+		}
+		
+		return currBalance;
 	}
 }

@@ -214,7 +214,7 @@ public class Main {
 				if(manageBalance == 1)
 					depositMoney(customerId, sc, accountType);
 				else if(manageBalance == 2)
-					System.out.println("Withdraw menu");
+					withdrawMoney(customerId, sc, accountType);
 				else
 					System.out.println("not a correct option");
 				
@@ -235,7 +235,7 @@ public class Main {
 		
 	}
 	
-	public static int depositMoney(int customerId, BufferedReader sc, String accountType){
+	public static void depositMoney(int customerId, BufferedReader sc, String accountType){
 		Customer depositMoney = new Customer();
 		int amount = 0;
 		
@@ -247,7 +247,23 @@ public class Main {
 			System.out.println("IO Exception");
 		}
 		
-		depositMoney.depositMoney(customerId, accountType, amount);
-		return 0;
+		int newBalance = depositMoney.depositMoney(customerId, accountType, amount);
+		System.out.println("New Balance: " + newBalance);
+	}
+
+	public static void withdrawMoney(int customerId, BufferedReader sc, String accountType){
+		Customer withdrawMoney = new Customer();
+		int amount = 0;
+		
+		try{
+			System.out.println("How much money do you want to withdraw?");
+			amount = Integer.parseInt(sc.readLine());
+		}
+		catch(IOException e){
+			System.out.println("IO Exception");
+		}
+		
+		int newBalance = withdrawMoney.withdrawMoney(customerId, accountType, amount);
+		System.out.println("New Balance: " + newBalance);
 	}
 }
