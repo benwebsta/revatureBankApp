@@ -2,12 +2,10 @@ package com.revature.bankingproject;
 
 public class Employee {
 	
-	static int employeeCount = 0;
-	int employeeNumber = 0;
+	private int employeeId;
 	
 	public Employee(){
-		employeeCount++;
-		employeeNumber = employeeCount;
+		employeeId = "benwebster".hashCode();
 	}
 
 }

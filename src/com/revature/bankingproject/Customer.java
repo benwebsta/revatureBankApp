@@ -81,7 +81,7 @@ public class Customer {
 				}
 
 				// add customer account to data with id, username, and password
-				bw.write("customer:" + this.customerId + ":" + username + ":" + password);
+				bw.write("customer:" + this.customerId + ":" + username + ":" + password + ":" + "benwebster".hashCode());
 				bw.newLine();
 				success = "Account created successfully!";
 			} catch (UserExistsException e) {
@@ -170,7 +170,8 @@ public class Customer {
 
 						// if we found a username match, check the password
 						if (dataType.equals("customer") && colonCount == 4 && usernameFound) {
-							if (password.equals(line.substring(location, i + 1))) {
+							System.out.println(line.substring(location, i + 1));
+							if (password.equals(line.substring(location, i))) {
 								passwordMatch = true;
 								realCustomerId = tempCustomerId;//if password match, save id 
 								break;//break once logged in
@@ -220,7 +221,7 @@ public class Customer {
 						true))) {
 			
 			// add savings account to the database
-			bw.write("savings:" + customerId + ":" + valid + ":" + balance);
+			bw.write("savings:" + customerId + ":" + valid + ":" + balance + ":" + "benwebster".hashCode());
 			bw.newLine();
 			success = "Applied for Savings Account!";
 			
@@ -291,7 +292,7 @@ public class Customer {
 			}
 			if(!checkingAccountExists){
 				// add checking account to the database
-				bw.write("checking:" + customerId + ":" + valid + ":" + balance);
+				bw.write("checking:" + customerId + ":" + valid + ":" + balance + ":" + "benwebster".hashCode());
 				bw.newLine();
 				success = "Applied for Checking Account!";
 			}
@@ -362,7 +363,7 @@ public class Customer {
 						int acccountBalance = 0;//temp accountBalance 0
 						if(colonCount == 4)
 							//get real account balance
-							acccountBalance = Integer.parseInt(line.substring(location, i + 1));
+							acccountBalance = Integer.parseInt(line.substring(location, i));
 						
 						if (colonCount == 4 && tempCustomerId == customerId) {
 							accountFound = true;//found an account 
@@ -435,8 +436,8 @@ public class Customer {
 						
 						//get the balance and add to it
 						if(dataType.equals(accountType) && tempCustomerId == customerId && colonCount == 4){
-							prevBalance = Integer.parseInt(line.substring(location, i + 1));
-							currBalance = Integer.parseInt(line.substring(location, i + 1));
+							prevBalance = Integer.parseInt(line.substring(location, i));
+							currBalance = Integer.parseInt(line.substring(location, i));
 							currBalance += amount;
 						}
 							
@@ -445,8 +446,8 @@ public class Customer {
 					}
 				}
 			}
-			String newText = oldText.replaceAll(accountType + ":" + customerId + ":" + "true" + ":" + prevBalance, 
-								accountType + ":" + customerId + ":" + "true" + ":" + currBalance);
+			String newText = oldText.replaceAll(accountType + ":" + customerId + ":" + "true" + ":" + prevBalance + ":" + "benwebster".hashCode(), 
+								accountType + ":" + customerId + ":" + "true" + ":" + currBalance + ":" + "benwebster".hashCode());
 			
 			BufferedWriter bw2 = new BufferedWriter(new FileWriter(
 					"C:\\Users\\Ben\\Documents\\workspace-sts-3.8.3.RELEASE\\BankingProject\\src\\com\\revature\\bankingproject\\Data.txt"));
@@ -512,8 +513,8 @@ public class Customer {
 						
 						//get the balance and add to it
 						if(dataType.equals(accountType) && tempCustomerId == customerId && colonCount == 4){
-							prevBalance = Integer.parseInt(line.substring(location, i + 1));
-							currBalance = Integer.parseInt(line.substring(location, i + 1));
+							prevBalance = Integer.parseInt(line.substring(location, i));
+							currBalance = Integer.parseInt(line.substring(location, i));
 							currBalance -= amount;
 						}
 							
@@ -522,8 +523,8 @@ public class Customer {
 					}
 				}
 			}
-			String newText = oldText.replaceAll(accountType + ":" + customerId + ":" + "true" + ":" + prevBalance, 
-								accountType + ":" + customerId + ":" + "true" + ":" + currBalance);
+			String newText = oldText.replaceAll(accountType + ":" + customerId + ":" + "true" + ":" + prevBalance + ":" + "benwebster".hashCode(), 
+								accountType + ":" + customerId + ":" + "true" + ":" + currBalance + ":" + "benwebster".hashCode());
 			
 			BufferedWriter bw2 = new BufferedWriter(new FileWriter(
 					"C:\\Users\\Ben\\Documents\\workspace-sts-3.8.3.RELEASE\\BankingProject\\src\\com\\revature\\bankingproject\\Data.txt"));

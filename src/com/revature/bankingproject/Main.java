@@ -8,6 +8,8 @@ import java.util.ArrayList;
 public class Main {
 	public static void main(String[] args) {
 
+		Employee emp = new Employee();
+		
 		//presents options for banking app
 		menuOption();
 		
@@ -67,8 +69,10 @@ public class Main {
 		System.out.println("----------------------");
 		System.out.println("1: Customer Sign up");
 		System.out.println("2: Customer Login");
-		System.out.println("3: Employee Login");
-		System.out.println("4: Admin Login");
+		System.out.println("3: Employee Sign up");
+		System.out.println("4: Employee Login");
+		System.out.println("5: Admin Sign up");
+		System.out.println("6: Admin Login");
 	}
 	
 	/**
