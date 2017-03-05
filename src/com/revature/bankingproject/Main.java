@@ -68,7 +68,13 @@ public class Main {
 				break;
 			case 5:
 				System.out.println("admin login");
-				adminLoginOption(sc);
+				System.out.println("-------------");
+				boolean adminLogin = adminLoginOption(sc);
+				while(!adminLogin){
+					System.out.println("Wrong login info, Mr. Admin");
+					adminLogin = adminLoginOption(sc);
+				}
+				viewCustomerAccounts(sc);
 				break;
 			default:
 				System.out.println("You didn't enter a correct number option");
@@ -495,7 +501,6 @@ public class Main {
 	 * @return the boolean whether login was successful
 	 */
 	public static boolean adminLoginOption(BufferedReader sc){
-		System.out.println("benwebsteradmin".hashCode());
 		boolean adminLoginResult = false;
 		try{
 			String username, password;
@@ -510,13 +515,37 @@ public class Main {
 			
 		}
 		catch(IOException e){
-			System.out.println("test");
 			System.out.println(e);
 		}
 		catch(Exception e){
 			System.out.println(e);
 		}
-		System.out.println(adminLoginResult);
 		return adminLoginResult;
 	}
+
+	/**
+	 * Retrieve customerid from data teid to username input
+	 * @param sc input scanner
+	 */
+	public static void viewCustomerAccounts(BufferedReader sc){
+		String customerUsername = "";
+		System.out.println("What is the username of the customer you want to view?");
+		try{
+			customerUsername = sc.readLine();
+		}
+		catch(IOException e){
+			System.out.println(e);
+		}
+		Admin customerId = new Admin();
+		String customerIdRetrieved = customerId.getCustomerId(customerUsername);
+		//only move on if customer with username was found
+		if(customerIdRetrieved.equals("")){
+			System.out.println("No customer with that username");
+		}
+		else{
+			//act as a customer logged in, but you are an admin in that account
+			customerLoggedInMenu(Integer.parseInt(customerIdRetrieved), sc);
+		}
+	}
+	
 }

@@ -108,5 +108,69 @@ public class Admin{
 		return success;
 	}
 
+	/**
+	 * Get customerid based on customerusername
+	 * @param customerUsername the username to check for
+	 * @return the String customerid
+	 */
+	public String getCustomerId(String customerUsername){
+		String tempCustomerId = "";
+		
+		// open reader and writer for data file
+		try (BufferedReader br = new BufferedReader(new FileReader(
+				"C:\\Users\\Ben\\Documents\\workspace-sts-3.8.3.RELEASE\\BankingProject\\src\\com\\revature\\bankingproject\\Data.txt"));
+				BufferedWriter bw = new BufferedWriter(new FileWriter(
+						"C:\\Users\\Ben\\Documents\\workspace-sts-3.8.3.RELEASE\\BankingProject\\src\\com\\revature\\bankingproject\\Data.txt",
+						true))) {
+			String line = "";
+			// loop through every line in the file to check for username
+			while ((line = br.readLine()) != null) {
+				
+				int location = 0;
+				int colonCount = 0;// switch variable to see how many colon you've seen
+				String currentUserName;
+				String dataType = "";
+
+				// loop through every character in the line, check for username match
+				for (int i = 0; i < line.length(); i++) {
+
+					// when we find a colon or end of line, there is a word
+					if (line.charAt(i) == ':' || i == line.length() - 1) {
+						colonCount++;// increment colon every time we find a word
+
+						// get the type of data on that line
+						if (colonCount == 1) {
+							dataType = line.substring(location, i);
+							
+							// if it is not a correct data type in data file break
+							if (!(dataType.equals("customer"))) {
+								break;
+							}
+						}
+						// keep track of customerid in case there is a match on username
+						if (colonCount == 2 && (dataType.equals("customer"))) {
+							tempCustomerId = line.substring(location, i);
+						}
+
+						// only check customer data types
+						if (dataType.equals("customer") && colonCount == 3) {
+							currentUserName = line.substring(location, i);
+							// if username is in file return customerid
+							if (customerUsername.equals(currentUserName)) {
+								return tempCustomerId;
+							}
+						}
+
+						location = i + 1;
+					}
+				}
+			}
+		} catch (IOException e) {
+			System.out.println("IO Exception");
+		} catch (Exception e) {
+			System.out.println("General Exception");
+		}
+		return "";
+	}
 	
 }
