@@ -1,13 +1,18 @@
 package com.revature.bankingproject;
 
+import org.apache.log4j.Logger;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 
 public class Main {
+	static final Logger l =  Logger.getRootLogger();
+	
 	public static void main(String[] args) {
 
+		l.info("in main");
+		
 		Employee emp = new Employee();
 		
 		//presents options for banking app
@@ -131,6 +136,7 @@ public class Main {
 		//call sign up method from Customer class
 		Customer createCustomer = new Customer();
 		String createAccountResult = createCustomer.signUpForServices(username, password);
+		l.info("customer account created");
 		return createAccountResult;
 	}
 	
@@ -184,6 +190,7 @@ public class Main {
 		catch(Exception e){
 			System.out.println(e);
 		}
+		l.info("Customer Logged in");
 		return customerLoggedInId;
 		
 	}
@@ -310,6 +317,7 @@ public class Main {
 		}
 		
 		int newBalance = depositMoney.depositMoney(customerId, accountType, amount);
+		l.info("deposited money");
 		System.out.println("New Balance: $" + newBalance);
 	}
 	
@@ -332,6 +340,7 @@ public class Main {
 		}
 		
 		int newBalance = withdrawMoney.withdrawMoney(customerId, accountType, amount);
+		l.info("Withdrew money");
 		System.out.println("New Balance: $" + newBalance);
 	}
 
@@ -362,6 +371,7 @@ public class Main {
 		//call sign up method from Customer class
 		Employee createEmployee = new Employee();
 		String createEmployeeResult = createEmployee.createEmployeeAccount(username, password);
+		l.info("created employee account");
 		return createEmployeeResult;
 	}
 
@@ -487,10 +497,12 @@ public class Main {
 			if(application[2].equals("true")){
 				//prints out results of approved
 				System.out.println(application[0] + " account " + application[1] + " approved!");
+				l.info("customer approved");
 			}
 			else if(application[2].equals("false")){
 				//prints out results of declined
 				System.out.println(application[0] + " account " + application[1] + " declined!");
+				l.info("customer denied");
 			}
 		}
 	}
@@ -520,6 +532,7 @@ public class Main {
 		catch(Exception e){
 			System.out.println(e);
 		}
+		l.info("admin logged in");
 		return adminLoginResult;
 	}
 
@@ -547,5 +560,5 @@ public class Main {
 			customerLoggedInMenu(Integer.parseInt(customerIdRetrieved), sc);
 		}
 	}
-	
+ 	
 }
