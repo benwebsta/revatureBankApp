@@ -1,11 +1,11 @@
-package com.revature.bankingproject;
+package com.revature.testing;
 
 import static org.junit.Assert.*;
 
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-public class MainTest {
+public class EmployeeTest {
 
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {

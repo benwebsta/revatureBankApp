@@ -15,12 +15,19 @@ public class Main {
 		
 		Employee emp = new Employee();
 		
-		//presents options for banking app
+		BufferedReader br = new BufferedReader (new InputStreamReader(System.in));
+		mainMenuOption(br);
+	
+	}
+	
+	/**
+	 * Abstracted away from main method to allow a scanner to be passed in
+	 * @param sc the file reader passed in for testing 
+	 */
+	public static void mainMenuOption(BufferedReader sc){
 		menuOption();
-		
-		//read in option selected for menu
-		try(BufferedReader sc = new BufferedReader(new InputStreamReader(System.in));) {
-			int response = Integer.parseInt(sc.readLine());
+		try{
+			int response = Integer.parseInt(sc.readLine()); 
 			
 			switch (response) {
 			case 1:
@@ -37,7 +44,7 @@ public class Main {
 					while(loginResult == 0){
 						loginResult = customerLoginOption(sc);
 					}
-					customerLoggedInMenu(loginResult, sc);;
+					customerLoggedInMenu(loginResult, sc);
 				}
 				break;
 			case 2:
@@ -127,9 +134,11 @@ public class Main {
 			password = sc.readLine();
 		}
 		catch(IOException e){
+			l.equals(e);
 			System.out.println(e);
 		}
 		catch(Exception e){
+			l.error(e);
 			System.out.println(e);
 		}
 		
@@ -184,10 +193,11 @@ public class Main {
 			}
 		}
 		catch(IOException e){
-			System.out.println("test");
+			l.error(e);
 			System.out.println(e);
 		}
 		catch(Exception e){
+			l.error(e);
 			System.out.println(e);
 		}
 		l.info("Customer Logged in");
@@ -234,7 +244,7 @@ public class Main {
 				break;
 			case 3://view accounts
 				Customer viewAccounts = new Customer();
-				ArrayList<String> viewAccountsResult;
+				ArrayList<String> viewAccountsResult;	
 				viewAccountsResult = viewAccounts.getAccountsForCustomer(customerId);
 				
 				String accountType;
