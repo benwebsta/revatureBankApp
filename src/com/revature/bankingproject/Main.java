@@ -32,7 +32,7 @@ public class Main {
 					while(loginResult == 0){
 						loginResult = customerLoginOption(sc);
 					}
-					customerLoginOption(sc);
+					customerLoggedInMenu(loginResult, sc);;
 				}
 				break;
 			case 2:
@@ -56,7 +56,7 @@ public class Main {
 					while(employeeLoginResult == 0){
 						employeeLoginResult = employeeLoginOption(sc);
 					}
-					employeeLoginOption(sc);
+					employeeLoggedInMenu(employeeLoginResult, sc);
 				}
 				break;
 			case 4:
@@ -418,7 +418,7 @@ public class Main {
 	}
 	
 	public static void employeeLoggedInMenu(int employeeId, BufferedReader sc){
-		System.out.println("employee logged in menu");
+		System.out.println(employeeId);
 	}
 	
 }
