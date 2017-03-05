@@ -280,7 +280,6 @@ public class Main {
 			}
 		}
 		catch(IOException e){
-			System.out.println("test");
 			System.out.println(e);
 		}
 		catch(Exception e){
@@ -417,8 +416,48 @@ public class Main {
 		
 	}
 	
-	public static void employeeLoggedInMenu(int employeeId, BufferedReader sc){
-		System.out.println(employeeId);
+	/**
+	 * Presents menu for logged in employee
+	 */
+	public static void employeeLoggedInMenuOption(){
+		//Menu for logged in employee
+		System.out.println("Employee Menu: Enter Selection");
+		System.out.println("------------------------------");
+		System.out.println("1: View all of you customers.");
+		System.out.println("2: See your customer's account applications to approve/decline.");
 	}
+
+	/**
+	 * Handle logged in employee selections
+	 * @param employeeId the unique employee id
+	 * @param sc the input scanner
+	 */
+	public static void employeeLoggedInMenu(int employeeId, BufferedReader sc){
+		employeeLoggedInMenuOption();
+		
+		try{
+			int response = Integer.parseInt(sc.readLine());
+			
+			switch(response){
+			case 1://view customer accounts
+				System.out.println("view customer accounts");
+				break;
+			case 2://see customer's account applications to approve/decline
+				System.out.println("see customer's account applications to approve/decline");
+				break;
+			default:
+				System.out.println("Not a valid option");
+				break;
+			}
+		}
+		catch(IOException e){
+			System.out.println(e);
+		}
+		catch(Exception e){
+			System.out.println(e);
+		}
+	}
+	
+
 	
 }
