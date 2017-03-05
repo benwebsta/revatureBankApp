@@ -100,7 +100,6 @@ public class Main {
 		}
 	}
 	
-
 	/**
 	 * Presents main menu option
 	 */

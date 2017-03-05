@@ -27,9 +27,8 @@ public class MainTest {
 
 	@Test
 	public void test() {
-		String line;
 		try (BufferedReader br = new BufferedReader(new FileReader(
-				"C:\\Users\\Ben\\Documents\\workspace-sts-3.8.3.RELEASE\\BankingProject\\src\\com\\revature\\testing\\mainTestCLI.txt"));)
+				"C:\\Users\\Ben\\Documents\\workspace-sts-3.8.3.RELEASE\\BankingProject\\src\\com\\revature\\testing\\MainTestCLI.txt"));)
 			{
 			mainMenuOption(br);
 			mainMenuOption(br);
