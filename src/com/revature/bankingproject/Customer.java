@@ -211,19 +211,60 @@ public class Customer {
 	 */
 	public String signUpForSavingsAccount(int customerId){
 		String success = " ";
+		String line = "";
 		int balance = 0;
+		int tempCustomerId;
+		boolean savingsAccountExists = false;
 		boolean valid = false;
+		
 		try (BufferedReader br = new BufferedReader(new FileReader(
 				"C:\\Users\\Ben\\Documents\\workspace-sts-3.8.3.RELEASE\\BankingProject\\src\\com\\revature\\bankingproject\\Data.txt"));
 				BufferedWriter bw = new BufferedWriter(new FileWriter(
 						"C:\\Users\\Ben\\Documents\\workspace-sts-3.8.3.RELEASE\\BankingProject\\src\\com\\revature\\bankingproject\\Data.txt",
 						true))) {
 			
-			// add savings account to the database
-			bw.write("savings:" + customerId + ":" + valid + ":" + balance + ":" + "benwebster".hashCode());
-			bw.newLine();
-			success = "Applied for Savings Account!";
-			
+			while ((line = br.readLine()) != null) {
+				tempCustomerId = 0;
+				
+				int location = 0;
+				int colonCount = 0;// switch variable to see how many colon you've seen
+				String dataType = "";
+
+				// loop through every character in the line, check for username match
+				for (int i = 0; i < line.length(); i++) {
+
+					// when we find a colon or end of line, there is a word
+					if (line.charAt(i) == ':' || i == line.length() - 1) {
+						colonCount++;// increment colon every time we find a word
+
+						// get the type of data on that line
+						if (colonCount == 1) {
+							dataType = line.substring(location, i);
+							// if it is not a correct data type in data file break
+							if (!(dataType.equals("savings"))) {
+								break;
+							}
+						}
+						
+						if(colonCount == 2)
+							tempCustomerId = Integer.parseInt(line.substring(location, i));
+						
+						if(dataType.equals("savings") && tempCustomerId == customerId)
+							savingsAccountExists = true;
+
+						location = i + 1;
+					}
+				}
+			}
+			if(!savingsAccountExists){
+				// add savings account to the database
+				bw.write("savings:" + customerId + ":" + valid + ":" + balance + ":" + "benwebster".hashCode());
+				bw.newLine();
+				success = "Applied for Savings Account!";
+			}
+			else{
+				success = "Checking Account already exists";
+			}
 		}
 		 catch (IOException e) {
 				success = "Unable to create account.";
@@ -248,8 +289,8 @@ public class Customer {
 		int balance = 0;
 		int tempCustomerId;
 		boolean checkingAccountExists = false;
-		
 		boolean valid = false;
+		
 		try (BufferedReader br = new BufferedReader(new FileReader(
 				"C:\\Users\\Ben\\Documents\\workspace-sts-3.8.3.RELEASE\\BankingProject\\src\\com\\revature\\bankingproject\\Data.txt"));
 				BufferedWriter bw = new BufferedWriter(new FileWriter(
@@ -335,6 +376,7 @@ public class Customer {
 			// loop through every line in the file to check for checking or savings account
 			while ((line = br.readLine()) != null) {
 				tempCustomerId = 0;
+				boolean tempValid = false;
 				
 				int location = 0;
 				int colonCount = 0;// switch variable to see how many colon you've seen
@@ -359,12 +401,17 @@ public class Customer {
 						if(colonCount == 2)
 							tempCustomerId = Integer.parseInt(line.substring(location, i));
 						
+						
+						if(colonCount == 3)
+							if(line.substring(location, i).equals("true"))
+								tempValid = true;
+						
 						int acccountBalance = 0;//temp accountBalance 0
 						if(colonCount == 4)
 							//get real account balance
 							acccountBalance = Integer.parseInt(line.substring(location, i));
 						
-						if (colonCount == 4 && tempCustomerId == customerId) {
+						if (colonCount == 4 && tempCustomerId == customerId && tempValid) {
 							accountFound = true;//found an account 
 							//add the account to the arraylist to return
 							accounts.add(dataType);

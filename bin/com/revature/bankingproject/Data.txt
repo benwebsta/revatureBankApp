@@ -4,7 +4,7 @@ checking:1237641879:true:1210:-287807177
 customer:3556498:test:test:-1657147581
 customer:-1392640279:benweb:password123:-1657147581
 customer:2047724685:newaccount:password:-1657147581
-savings:1237641879:true:800:-287807177
+savings:1237641879:false:800:-287807177
 customer:-1154382429:jonlee:pass:-287807177
 savings:-1154382429:true:0:-287807177
 customer:-542574309:morysabitch:pass:-287807177
@@ -13,3 +13,4 @@ employee:-1657147581:employee1:pass:-1657147581
 employee:-287807177:benwebster:pass:-287807177
 customer:-877169473:tester:pass:-1657147581
 savings:-1422449838:true:0:-1657147581
+savings:-542574309:false:0:-287807177
