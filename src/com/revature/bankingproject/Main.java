@@ -454,7 +454,7 @@ public class Main {
 				System.out.println("-------------------------------");
 				break;
 			case 2://see customer's account applications to approve/decline
-				System.out.println("see account applications to approve/decline");
+				approveAccountApplications(sc);
 				break;
 			default:
 				System.out.println("Not a valid option");
@@ -469,5 +469,21 @@ public class Main {
 		}
 	}
 	
+	public static void approveAccountApplications(BufferedReader sc){
+		Employee employee = new Employee();
+		String[] application = employee.getAccountApplications(sc);
+		
+		if(application[0].equals("")){
+			System.out.println("No accounts to approve.");
+		}
+		else{
+			if(application[2].equals("true")){
+				System.out.println(application[0] + " account " + application[1] + " approved!");
+			}
+			else if(application[2].equals("false")){
+				System.out.println(application[0] + " account " + application[1] + " declined!");
+			}
+		}
+	}
 	
 }

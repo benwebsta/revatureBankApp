@@ -350,4 +350,159 @@ public class Employee {
 		return listOfCustomers;
 	}
 
+	public String[] getAccountApplications(BufferedReader sc){
+		String[] result = {"", "", ""};
+		String line2;
+		//2 copies of data file to iterate through
+		ArrayList<String> file= new ArrayList<String>();
+		ArrayList<String> file2= new ArrayList<String>();
+		
+		try (BufferedReader br = new BufferedReader(new FileReader(
+				"C:\\Users\\Ben\\Documents\\workspace-sts-3.8.3.RELEASE\\BankingProject\\src\\com\\revature\\bankingproject\\Data.txt"));
+				BufferedWriter bw = new BufferedWriter(new FileWriter(
+						"C:\\Users\\Ben\\Documents\\workspace-sts-3.8.3.RELEASE\\BankingProject\\src\\com\\revature\\bankingproject\\Data.txt",
+						true))) {
+			//populate copies of data file to traverse
+			while((line2 = br.readLine()) != null){
+				file.add(line2);
+				file2.add(line2);
+			}
+			
+		}
+		 catch (IOException e) {
+			System.out.println("IO Exception");
+		} catch (Exception e) {
+			System.out.println("General Exception");
+		}
+			
+			//String line = "";
+			String oldText = "";
+			String tempCustomerId = "";
+			String currBalance = "";
+			String employeeId = "";
+			String accountType = "";
+			String approve = "false";
+			boolean found = false;
+			boolean throughLine = false;
+			
+			//while ((line = br.readLine()) != null && !found) {
+			for(String line : file){
+				if(!found){
+				
+					//oldText += line + "\r\n";
+					approve = "false";
+	
+					int location = 0;
+					int colonCount = 0;// switch variable to see how many colon you've seen
+					String dataType = "";
+	
+					// loop through every character in the line, check for username match
+					for (int i = 0; i < line.length(); i++) {
+	
+						// when we find a colon or end of line, there is a word
+						if (line.charAt(i) == ':' || i == line.length() - 1) {
+							colonCount++;// increment colon every time we find a word
+	
+							// get the type of data on that line
+							if (colonCount == 1) {
+								dataType = line.substring(location, i);
+								accountType = dataType;
+								// only looking for savings and checking
+								if ((!(dataType.equals("savings"))) && (!(dataType.equals("checking")))) {
+									break;
+								}
+							}
+							
+							if(colonCount == 2 && !found){
+								tempCustomerId = line.substring(location, i);
+								System.out.println("tempcust " + tempCustomerId);
+							}
+							//only looking for unapproved accounts
+							if(colonCount == 3){
+								if((line.substring(location, i)).equals("true")){
+									break;
+								}
+								else{
+									System.out.println("found true");
+									found = true;
+								}
+							}
+							if(colonCount == 4 && !throughLine){
+								currBalance = line.substring(location, i);
+								System.out.println("currbal " + currBalance);
+							}
+							if(colonCount == 5 && !throughLine){
+								employeeId = line.substring(location, i + 1);
+								System.out.println("employeeid " + employeeId);
+							}
+							if(colonCount == 5 && found){
+								throughLine = true;
+							}
+							location = i + 1;
+						}
+					}
+				}
+			}
+			String[] account = {accountType, tempCustomerId, approve, currBalance, employeeId};
+			boolean accountApproval = approveAccountApplications(account, sc);
+			if(accountApproval)
+				approve = "true";
+			result[0] = accountType;
+			result[1] = tempCustomerId;
+			result[2] = approve;
+			
+			for(String newLine : file2){
+				oldText += newLine + "\r\n";
+			}
+			
+			if(accountApproval){
+				System.out.println(accountType + ":" + tempCustomerId + ":" + "false" + ":" + currBalance + ":" + employeeId);
+				System.out.println(accountType + ":" + tempCustomerId + ":" + "true" + ":" + currBalance + ":" + employeeId);
+				String newText = oldText.replaceAll(accountType + ":" + tempCustomerId + ":" + "false" + ":" + currBalance + ":" + employeeId, 
+						accountType + ":" + tempCustomerId + ":" + "true" + ":" + currBalance + ":" + employeeId);
+			
+				try{
+					BufferedWriter bw2 = new BufferedWriter(new FileWriter(
+							"C:\\Users\\Ben\\Documents\\workspace-sts-3.8.3.RELEASE\\BankingProject\\src\\com\\revature\\bankingproject\\Data.txt"));
+					bw2.write(newText);
+					bw2.close();
+				}
+				catch(IOException e){
+					System.out.println(e);
+				}
+			}
+			
+		
+		return result;
+	}
+	
+	public static boolean approveAccountApplications(String[] account, BufferedReader sc){
+		int response = 0;
+		boolean approve = false;
+
+		System.out.println(account[0] + " for " + "customer id: " + account[1]);
+		System.out.println("------------");
+		System.out.println("Approve: 1");
+		System.out.println("Decline: 2");
+		
+		try{
+			response = Integer.parseInt(sc.readLine());
+		}
+		catch(IOException e){
+			System.out.println(e);
+		}
+		
+		switch(response){
+		case 1: 
+			approve = true;
+			break;
+		case 2:
+			approve = false;
+			break;
+		default: 
+			System.out.println("Not a valid option");
+			break;
+		}
+		return approve;
+	}
 }

@@ -401,7 +401,7 @@ public class Customer {
 						if(colonCount == 2)
 							tempCustomerId = Integer.parseInt(line.substring(location, i));
 						
-						
+						//only show approved accounts
 						if(colonCount == 3)
 							if(line.substring(location, i).equals("true"))
 								tempValid = true;
