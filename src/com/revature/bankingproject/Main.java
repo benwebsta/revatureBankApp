@@ -469,6 +469,10 @@ public class Main {
 		}
 	}
 	
+	/**
+	 * Calls get account applications and prints out the results
+	 * @param sc input reader
+	 */
 	public static void approveAccountApplications(BufferedReader sc){
 		Employee employee = new Employee();
 		String[] application = employee.getAccountApplications(sc);
@@ -478,9 +482,11 @@ public class Main {
 		}
 		else{
 			if(application[2].equals("true")){
+				//prints out results of approved
 				System.out.println(application[0] + " account " + application[1] + " approved!");
 			}
 			else if(application[2].equals("false")){
+				//prints out results of declined
 				System.out.println(application[0] + " account " + application[1] + " declined!");
 			}
 		}

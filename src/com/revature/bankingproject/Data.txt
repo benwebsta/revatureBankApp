@@ -1,9 +1,13 @@
 customer:1237641879:benwebsta:password123:-287807177
 customer:-287807364:benwebsta3:password:-1657147581
 checking:1237641879:true:1210:-287807177
-customer:3556498:test:test:-1657147581
-customer:-1392640279:benweb:password123:-1657147581
-customer:2047724685:newaccount:password:-1657147581
 savings:1237641879:true:800:-287807177
+
+customer:-1392640279:benweb:password123:-1657147581
+customer:3556498:test:test:-1657147581
+customer:2047724685:newaccount:password:-1657147581
 employee:-287807177:benwebster:pass:-287807177
-checking:-287807364:true:0:-287807177
+
+
+checking:-287807364:true:100:-287807177
+savings:-287807364:false:0:-287807177

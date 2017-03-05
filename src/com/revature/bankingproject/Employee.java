@@ -350,6 +350,11 @@ public class Employee {
 		return listOfCustomers;
 	}
 
+	/**
+	 * Gets first unapproved account and allows employee to approve or decline
+	 * @param sc input scanner
+	 * @return String array of the resulting account
+	 */
 	public String[] getAccountApplications(BufferedReader sc){
 		String[] result = {"", "", ""};
 		String line2;
@@ -375,7 +380,7 @@ public class Employee {
 			System.out.println("General Exception");
 		}
 			
-			//String line = "";
+			//variables used in finding and updating accounts
 			String oldText = "";
 			String tempCustomerId = "";
 			String currBalance = "";
@@ -387,9 +392,10 @@ public class Employee {
 			
 			//while ((line = br.readLine()) != null && !found) {
 			for(String line : file){
+				//only uses first account unapproved
 				if(!found){
 				
-					//oldText += line + "\r\n";
+					//reset approve to false for each new line
 					approve = "false";
 	
 					int location = 0;
@@ -413,31 +419,30 @@ public class Employee {
 								}
 							}
 							
-							if(colonCount == 2 && !found){
+							//maintain customerId so you dont have to go backwards in line
+							if(colonCount == 2 && !found)
 								tempCustomerId = line.substring(location, i);
-								System.out.println("tempcust " + tempCustomerId);
-							}
+							
 							//only looking for unapproved accounts
 							if(colonCount == 3){
 								if((line.substring(location, i)).equals("true")){
 									break;
 								}
 								else{
-									System.out.println("found true");
+									//when an account is false, we found one to approve or decline
 									found = true;
 								}
 							}
-							if(colonCount == 4 && !throughLine){
+							//if you haven't been through the whole line once, get balance
+							if(colonCount == 4 && !throughLine)
 								currBalance = line.substring(location, i);
-								System.out.println("currbal " + currBalance);
-							}
-							if(colonCount == 5 && !throughLine){
+							//if you haven't been through the whole line once, get employeeId
+							if(colonCount == 5 && !throughLine)
 								employeeId = line.substring(location, i + 1);
-								System.out.println("employeeid " + employeeId);
-							}
-							if(colonCount == 5 && found){
+							//if you're at the end of line and found a false account, you mark you've traversed
+							if(colonCount == 5 && found)
 								throughLine = true;
-							}
+							
 							location = i + 1;
 						}
 					}
@@ -454,13 +459,25 @@ public class Employee {
 			for(String newLine : file2){
 				oldText += newLine + "\r\n";
 			}
-			
+			//if employee approves, overwrite false to true on account, so its usable
 			if(accountApproval){
-				System.out.println(accountType + ":" + tempCustomerId + ":" + "false" + ":" + currBalance + ":" + employeeId);
-				System.out.println(accountType + ":" + tempCustomerId + ":" + "true" + ":" + currBalance + ":" + employeeId);
 				String newText = oldText.replaceAll(accountType + ":" + tempCustomerId + ":" + "false" + ":" + currBalance + ":" + employeeId, 
 						accountType + ":" + tempCustomerId + ":" + "true" + ":" + currBalance + ":" + employeeId);
 			
+				try{
+					BufferedWriter bw2 = new BufferedWriter(new FileWriter(
+							"C:\\Users\\Ben\\Documents\\workspace-sts-3.8.3.RELEASE\\BankingProject\\src\\com\\revature\\bankingproject\\Data.txt"));
+					bw2.write(newText);
+					bw2.close();
+				}
+				catch(IOException e){
+					System.out.println(e);
+				}
+			}
+			//if employee declines, delete account from database
+			else if(!accountApproval){
+				String newText = oldText.replaceAll(accountType + ":" + tempCustomerId + ":" + "false" + ":" + currBalance + ":" + employeeId, 
+						"");
 				try{
 					BufferedWriter bw2 = new BufferedWriter(new FileWriter(
 							"C:\\Users\\Ben\\Documents\\workspace-sts-3.8.3.RELEASE\\BankingProject\\src\\com\\revature\\bankingproject\\Data.txt"));
@@ -476,6 +493,12 @@ public class Employee {
 		return result;
 	}
 	
+	/**
+	 * Takes in string array, presents the account and asks employee for approve or decline
+	 * @param account String array representing the account
+	 * @param sc input scanner
+	 * @return true or false depending on approve or decline
+	 */
 	public static boolean approveAccountApplications(String[] account, BufferedReader sc){
 		int response = 0;
 		boolean approve = false;
@@ -492,6 +515,7 @@ public class Employee {
 			System.out.println(e);
 		}
 		
+		//input approve or decline by employee
 		switch(response){
 		case 1: 
 			approve = true;
