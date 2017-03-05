@@ -20,13 +20,13 @@ public class Main {
 			switch (response) {
 			case 1:
 				//presents options for creating account
-				String createAccountResult = createCustomerAccountOption(sc);
+				String createCustomerAccountResult = createCustomerAccountOption(sc);
 				
-				System.out.println(createAccountResult);
-				if(!(createAccountResult.equals("Account created successfully!"))){
+				System.out.println(createCustomerAccountResult);
+				if(!(createCustomerAccountResult.equals("Account created successfully!"))){
 					main(null);
 				}
-				else if((createAccountResult.equals("Account created successfully!"))){
+				else if((createCustomerAccountResult.equals("Account created successfully!"))){
 					int loginResult = 0;
 					
 					while(loginResult == 0){
@@ -36,17 +36,37 @@ public class Main {
 				}
 				break;
 			case 2:
-				int loginResult = 0;
+				int customerLoginResult = 0;
 				
-				while(loginResult == 0)
-					loginResult = customerLoginOption(sc);
-				customerLoggedInMenu(loginResult, sc);
+				while(customerLoginResult == 0)
+					customerLoginResult = customerLoginOption(sc);
+				customerLoggedInMenu(customerLoginResult, sc);
 				break;
 			case 3:
-				System.out.println("Employee Login");
+				//presents options for creating account
+				String createEmployeeAccountResult = createEmployeeAccountOption(sc);
+				
+				System.out.println(createEmployeeAccountResult);
+				if(!(createEmployeeAccountResult.equals("Account created successfully!"))){
+					main(null);
+				}
+				else if((createEmployeeAccountResult.equals("Account created successfully!"))){
+					int employeeLoginResult = 0;
+					
+					while(employeeLoginResult == 0){
+						employeeLoginResult = employeeLoginOption(sc);
+					}
+					customerLoginOption(sc);
+				}
 				break;
 			case 4:
-				System.out.println("Admin Login");
+				System.out.println("Employee login");
+				break;
+			case 5:
+				System.out.println("Admin sign up");
+				break;
+			case 6:
+				System.out.println("admin login");
 				break;
 			default:
 				System.out.println("You didn't enter a correct number option");
@@ -307,4 +327,35 @@ public class Main {
 		int newBalance = withdrawMoney.withdrawMoney(customerId, accountType, amount);
 		System.out.println("New Balance: $" + newBalance);
 	}
+
+	public static String createEmployeeAccountOption(BufferedReader sc){
+		String username = "";
+		String password = "";
+		try
+		{
+			System.out.println("Employee Sign Up Page");
+			System.out.println("-----------------------");
+			System.out.println("Enter username:");
+			username = sc.readLine();
+			System.out.println("Enter password:");	
+			password = sc.readLine();
+		}
+		catch(IOException e){
+			System.out.println(e);
+		}
+		catch(Exception e){
+			System.out.println(e);
+		}
+		
+		//call sign up method from Customer class
+		Employee createEmployee = new Employee();
+		String createEmployeeResult = createEmployee.createEmployeeAccount(username, password);
+		return createEmployeeResult;
+	}
+	public static int employeeLoginOption(BufferedReader sc){
+		System.out.println("Employee login option");
+		return 0;
+	}
+	
+	
 }
