@@ -423,7 +423,7 @@ public class Main {
 		//Menu for logged in employee
 		System.out.println("Employee Menu: Enter Selection");
 		System.out.println("------------------------------");
-		System.out.println("1: View all of you customers.");
+		System.out.println("1: View all of your customers.");
 		System.out.println("2: See your customer's account applications to approve/decline.");
 	}
 
@@ -440,10 +440,17 @@ public class Main {
 			
 			switch(response){
 			case 1://view customer accounts
-				System.out.println("view customer accounts");
+				Employee employee = new Employee();
+				ArrayList<String[]> customerAccounts = employee.viewCustomerAccounts(employeeId);
+				for(int i = 0; i < customerAccounts.size(); i++){
+					String[] customerStringArray = customerAccounts.get(i);
+					if((!(customerStringArray[0].equals("savings"))) && (!(customerStringArray[0].equals("checking"))))
+							System.out.println("-------------------------------");
+					System.out.println(customerStringArray[0] + " " + customerStringArray[1]);
+				}
 				break;
 			case 2://see customer's account applications to approve/decline
-				System.out.println("see customer's account applications to approve/decline");
+				System.out.println("see account applications to approve/decline");
 				break;
 			default:
 				System.out.println("Not a valid option");
@@ -458,6 +465,5 @@ public class Main {
 		}
 	}
 	
-
 	
 }

@@ -5,6 +5,7 @@ import java.io.BufferedWriter;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.ArrayList;
 
 public class Employee {
 	
@@ -197,5 +198,146 @@ public class Employee {
 		return success;
 	}
 
+	public ArrayList<String[]> viewCustomerAccounts(int employeeId){
+		ArrayList<String[]> listOfCustomers = new ArrayList<String[]>();
+		
+		ArrayList<String> file= new ArrayList<String>();
+		ArrayList<String> file2= new ArrayList<String>();
+		String[] customer = new String[2];
+		
+		
+		String line;
+		//Strings to maintain the data sections
+/*		String customerUsername = "";
+		String customerId = "";
+		String customerAccountType = "";
+		String customerAccountBalance = "";
+		int customerEmployeeId1 = 0;
+		int customerEmployeeId2 = 0;*/
+		
+
+		// open reader and writer for data file
+		try (BufferedReader br = new BufferedReader(new FileReader(
+				"C:\\Users\\Ben\\Documents\\workspace-sts-3.8.3.RELEASE\\BankingProject\\src\\com\\revature\\bankingproject\\Data.txt"));
+				BufferedWriter bw = new BufferedWriter(new FileWriter(
+						"C:\\Users\\Ben\\Documents\\workspace-sts-3.8.3.RELEASE\\BankingProject\\src\\com\\revature\\bankingproject\\Data.txt",
+						true))) {
+			
+					while((line = br.readLine()) != null){
+						file.add(line);
+						file2.add(line);
+					}
+				} catch (IOException e) {
+					System.out.println("IO Exception");
+				} catch (Exception e) {
+					System.out.println("General Exception");
+				}
+		for(String line2 : file){
+			//System.out.println("Line2: " + line2);
+			int colonCount = 0;
+			int location = 0;
+			boolean match = false;
+			String tempCustomerId = "";
+			String tempCustomerUsername = "";
+			boolean customerAdded = false;
+			boolean savingsAdded = false;
+			boolean checkingAdded = false;
+			boolean savingsMatch = false;
+			boolean checkingMatch = false;
+			String tempSavingsBalance = "";
+			String tempCheckingBalance = "";
+			
+			//loop through every character
+			for(int i = 0; i < line2.length(); i++){
+				// when we find a colon or end of line, there is a word
+				if (line2.charAt(i) == ':' || i == line2.length() - 1) {
+					colonCount++;
+					if(colonCount == 1){
+						String dataType = line2.substring(location, i);
+						if (!(dataType.equals("customer"))){
+							break;
+						}
+					}
+					if(colonCount == 2){
+						tempCustomerId = line2.substring(location, i);
+					}
+					if(colonCount == 3){
+						tempCustomerUsername = line2.substring(location, i);
+					}
+					if(colonCount == 5){
+						int customerEmployeeId = Integer.parseInt(line2.substring(location, i + 1));
+						if(customerEmployeeId == employeeId){
+							match = true;
+							//System.out.println(tempCustomerId);
+						}
+					}
+					if(match){
+						for(String line3 : file2){
+							//System.out.println("Line3: " + line3);
+							int colonCount2 = 0;
+							String dataType2 = "";
+							int location2 = 0;
+							String currCustomerId = "";
+							
+							//loop through every character
+							for(int j = 0; j < line3.length(); j++){
+								// when we find a colon or end of line, there is a word
+								if (line3.charAt(j) == ':' || j == line3.length() - 1) {
+									colonCount2++;
+									if(colonCount2 == 1){
+										dataType2 = line3.substring(location2, j);
+										if((!(dataType2.equals("savings"))) && (!(dataType2.equals("checking")))){
+											break;
+										}
+									}
+									if(colonCount2 == 2){
+										currCustomerId = line3.substring(location2, j);
+									}
+									if(colonCount2 == 4 && currCustomerId.equals(tempCustomerId)){
+										//System.out.println("dataType2: " + dataType2);
+										if(dataType2.equals("savings") && !(savingsMatch)){
+											tempSavingsBalance = line3.substring(location2, j);
+											//System.out.println("tempsav: " + tempSavingsBalance);
+											savingsMatch = true;
+										}
+										else if(dataType2.equals("checking") && !(checkingMatch)){
+											tempCheckingBalance = line3.substring(location2, j);
+											//System.out.println("tempChk: " + tempCheckingBalance);
+											checkingMatch = true;
+										}
+									}
+	
+									location2 = j + 1;
+								}
+							}
+							if(checkingMatch && savingsMatch)
+								break;
+
+						}
+						if(!customerAdded && !savingsAdded && !checkingAdded){
+							String[] customerName = {tempCustomerUsername, tempCustomerId};
+							//System.out.println("add: " + customerName[0] + " " + customerName[1]);
+							listOfCustomers.add(customerName);
+							customerAdded = true;
+							if(savingsMatch){
+								String[] savingsAccount = {"savings", tempSavingsBalance};
+								//System.out.println("add: " + savingsAccount[0] + " " + savingsAccount[1]);
+								listOfCustomers.add(savingsAccount);
+								savingsAdded = true;
+							}
+							if(checkingMatch){
+								String[] checkingAccount = {"checking", tempCheckingBalance};
+								//System.out.println("add: " + checkingAccount[0] + " " + checkingAccount[1]);
+								listOfCustomers.add(checkingAccount);
+								checkingAdded = true;
+							}
+						}
+					}
+					location = i + 1;
+				}
+			}
+		}
+		return listOfCustomers;
+	}
 
 }
