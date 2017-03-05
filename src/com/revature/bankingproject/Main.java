@@ -67,10 +67,8 @@ public class Main {
 				employeeLoggedInMenu(employeeLoginResult, sc);
 				break;
 			case 5:
-				System.out.println("Admin sign up");
-				break;
-			case 6:
 				System.out.println("admin login");
+				adminLoginOption(sc);
 				break;
 			default:
 				System.out.println("You didn't enter a correct number option");
@@ -96,8 +94,7 @@ public class Main {
 		System.out.println("2: Customer Login");
 		System.out.println("3: Employee Sign up");
 		System.out.println("4: Employee Login");
-		System.out.println("5: Admin Sign up");
-		System.out.println("6: Admin Login");
+		System.out.println("5: Admin Login");
 	}
 	
 	/**
@@ -492,4 +489,34 @@ public class Main {
 		}
 	}
 	
+	/**
+	 * Tries to log in as admin, calling admin class, then returning true or false
+	 * @param sc input scanner
+	 * @return the boolean whether login was successful
+	 */
+	public static boolean adminLoginOption(BufferedReader sc){
+		System.out.println("benwebsteradmin".hashCode());
+		boolean adminLoginResult = false;
+		try{
+			String username, password;
+			System.out.println("Enter username: ");
+			username = sc.readLine();
+			System.out.println("Enter password: ");
+			password = sc.readLine();
+			
+			//tries to login with username and password input
+			Admin adminLogin = new Admin();
+			adminLoginResult = adminLogin.login(username, password);
+			
+		}
+		catch(IOException e){
+			System.out.println("test");
+			System.out.println(e);
+		}
+		catch(Exception e){
+			System.out.println(e);
+		}
+		System.out.println(adminLoginResult);
+		return adminLoginResult;
+	}
 }
