@@ -441,13 +441,17 @@ public class Main {
 			switch(response){
 			case 1://view customer accounts
 				Employee employee = new Employee();
+				//get array list of customer's accounts tied to employee
 				ArrayList<String[]> customerAccounts = employee.viewCustomerAccounts(employeeId);
+				
+				//display list in visual way
 				for(int i = 0; i < customerAccounts.size(); i++){
 					String[] customerStringArray = customerAccounts.get(i);
 					if((!(customerStringArray[0].equals("savings"))) && (!(customerStringArray[0].equals("checking"))))
 							System.out.println("-------------------------------");
 					System.out.println(customerStringArray[0] + " " + customerStringArray[1]);
 				}
+				System.out.println("-------------------------------");
 				break;
 			case 2://see customer's account applications to approve/decline
 				System.out.println("see account applications to approve/decline");

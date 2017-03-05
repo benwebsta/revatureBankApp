@@ -198,22 +198,21 @@ public class Employee {
 		return success;
 	}
 
+	/**
+	 * Traverse the data file twice to get matching customers and matching accounts tied to those customers
+	 * @param employeeId the current employee to match customers with
+	 * @return Array list of string arrays, which hold customers and customer accounts
+	 */
 	public ArrayList<String[]> viewCustomerAccounts(int employeeId){
 		ArrayList<String[]> listOfCustomers = new ArrayList<String[]>();
 		
+		//2 copies of data file to iterate through
 		ArrayList<String> file= new ArrayList<String>();
 		ArrayList<String> file2= new ArrayList<String>();
-		String[] customer = new String[2];
 		
+		String[] customer = new String[2];//String array of data line
 		
 		String line;
-		//Strings to maintain the data sections
-/*		String customerUsername = "";
-		String customerId = "";
-		String customerAccountType = "";
-		String customerAccountBalance = "";
-		int customerEmployeeId1 = 0;
-		int customerEmployeeId2 = 0;*/
 		
 
 		// open reader and writer for data file
@@ -223,6 +222,7 @@ public class Employee {
 						"C:\\Users\\Ben\\Documents\\workspace-sts-3.8.3.RELEASE\\BankingProject\\src\\com\\revature\\bankingproject\\Data.txt",
 						true))) {
 			
+					//populate copies of data file to traverse
 					while((line = br.readLine()) != null){
 						file.add(line);
 						file2.add(line);
@@ -232,8 +232,9 @@ public class Employee {
 				} catch (Exception e) {
 					System.out.println("General Exception");
 				}
+		//outer loop to check accounts tied to employee
 		for(String line2 : file){
-			//System.out.println("Line2: " + line2);
+			//variables for storing and validating accounts
 			int colonCount = 0;
 			int location = 0;
 			boolean match = false;
@@ -252,28 +253,35 @@ public class Employee {
 				// when we find a colon or end of line, there is a word
 				if (line2.charAt(i) == ':' || i == line2.length() - 1) {
 					colonCount++;
+					//first slot is account type
 					if(colonCount == 1){
+						//break if it is not a customer type of account
 						String dataType = line2.substring(location, i);
 						if (!(dataType.equals("customer"))){
 							break;
 						}
 					}
+					
+					//store customers id for future use
 					if(colonCount == 2){
 						tempCustomerId = line2.substring(location, i);
 					}
+					//store customers username for future use
 					if(colonCount == 3){
 						tempCustomerUsername = line2.substring(location, i);
 					}
+					//get employee id tied to customer account
 					if(colonCount == 5){
 						int customerEmployeeId = Integer.parseInt(line2.substring(location, i + 1));
 						if(customerEmployeeId == employeeId){
 							match = true;
-							//System.out.println(tempCustomerId);
 						}
 					}
+					//if customer's employee id match with current employee then its a match
 					if(match){
+						//inner loop, traverse file with current customer id to look for matching 
+						//savings and checking accounts
 						for(String line3 : file2){
-							//System.out.println("Line3: " + line3);
 							int colonCount2 = 0;
 							String dataType2 = "";
 							int location2 = 0;
@@ -286,6 +294,7 @@ public class Employee {
 									colonCount2++;
 									if(colonCount2 == 1){
 										dataType2 = line3.substring(location2, j);
+										//only looking for saving and checking accounts
 										if((!(dataType2.equals("savings"))) && (!(dataType2.equals("checking")))){
 											break;
 										}
@@ -293,13 +302,14 @@ public class Employee {
 									if(colonCount2 == 2){
 										currCustomerId = line3.substring(location2, j);
 									}
+									//only look at accounts that match customer id
 									if(colonCount2 == 4 && currCustomerId.equals(tempCustomerId)){
-										//System.out.println("dataType2: " + dataType2);
+										//get savings balance and mark as savings found
 										if(dataType2.equals("savings") && !(savingsMatch)){
 											tempSavingsBalance = line3.substring(location2, j);
-											//System.out.println("tempsav: " + tempSavingsBalance);
 											savingsMatch = true;
 										}
+										//get checking balance and mark as checking found
 										else if(dataType2.equals("checking") && !(checkingMatch)){
 											tempCheckingBalance = line3.substring(location2, j);
 											//System.out.println("tempChk: " + tempCheckingBalance);
@@ -310,24 +320,24 @@ public class Employee {
 									location2 = j + 1;
 								}
 							}
+							//leave if checking and savings account already found
 							if(checkingMatch && savingsMatch)
 								break;
 
 						}
+						//only enter in database in a group of: customer, savings account(if they have one), and 
+						//checking account(if they have one) all at once to group them in the array list
 						if(!customerAdded && !savingsAdded && !checkingAdded){
 							String[] customerName = {tempCustomerUsername, tempCustomerId};
-							//System.out.println("add: " + customerName[0] + " " + customerName[1]);
 							listOfCustomers.add(customerName);
 							customerAdded = true;
 							if(savingsMatch){
 								String[] savingsAccount = {"savings", tempSavingsBalance};
-								//System.out.println("add: " + savingsAccount[0] + " " + savingsAccount[1]);
 								listOfCustomers.add(savingsAccount);
 								savingsAdded = true;
 							}
 							if(checkingMatch){
 								String[] checkingAccount = {"checking", tempCheckingBalance};
-								//System.out.println("add: " + checkingAccount[0] + " " + checkingAccount[1]);
 								listOfCustomers.add(checkingAccount);
 								checkingAdded = true;
 							}
