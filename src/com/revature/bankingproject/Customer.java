@@ -12,7 +12,7 @@ public class Customer {
 	private int customerId;// customerId for uniqueness
 
 	/**
-	 * 
+	 * Check username already exists, create account
 	 * @param customerId
 	 *            the input customer id
 	 * @param username
@@ -99,7 +99,7 @@ public class Customer {
 	}
 
 	/**
-	 * 
+	 * Check for username and password, return results/if it matches
 	 * @param username
 	 *            the string username passed in
 	 * @param password
@@ -170,7 +170,6 @@ public class Customer {
 
 						// if we found a username match, check the password
 						if (dataType.equals("customer") && colonCount == 4 && usernameFound) {
-							System.out.println(line.substring(location, i + 1));
 							if (password.equals(line.substring(location, i))) {
 								passwordMatch = true;
 								realCustomerId = tempCustomerId;//if password match, save id 
@@ -206,7 +205,7 @@ public class Customer {
 	}
 
 	/**
-	 * 
+	 * Creates saving account for customer if not one already
 	 * @param customerId the foreign key id to associate with in the database
 	 * @return String the result of the savings account application
 	 */
@@ -239,7 +238,7 @@ public class Customer {
 	}
 	
 	/**
-	 * 
+	 * Creates checking acocunt for customer if not one already
 	 * @param customerId the foreign key id to associate with in the database
 	 * @return String the result of the checking account application
 	 */
@@ -314,7 +313,7 @@ public class Customer {
 	}
 	
 	/**
-	 * 
+	 * Returns accounts for customer
 	 * @param customerId the foreign key id to associate with in the database
 	 * @return Arraylist of accounts represented as strings
 	 */

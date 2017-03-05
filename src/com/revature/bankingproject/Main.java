@@ -56,11 +56,15 @@ public class Main {
 					while(employeeLoginResult == 0){
 						employeeLoginResult = employeeLoginOption(sc);
 					}
-					customerLoginOption(sc);
+					employeeLoginOption(sc);
 				}
 				break;
 			case 4:
-				System.out.println("Employee login");
+				int employeeLoginResult = 0;
+				
+				while(employeeLoginResult == 0)
+					employeeLoginResult = employeeLoginOption(sc);
+				employeeLoggedInMenu(employeeLoginResult, sc);
 				break;
 			case 5:
 				System.out.println("Admin sign up");
@@ -80,6 +84,7 @@ public class Main {
 		}
 	}
 	
+
 	/**
 	 * Presents main menu option
 	 */
@@ -129,8 +134,8 @@ public class Main {
 	/**
 	 * Tries to login with username and password input
 	 * 
-	 * @param sc
-	 * @return
+	 * @param sc input scanner
+	 * @return integer value of customer id
 	 */
 	public static int customerLoginOption(BufferedReader sc){
 		int customerLoggedInId = 0;
@@ -328,6 +333,11 @@ public class Main {
 		System.out.println("New Balance: $" + newBalance);
 	}
 
+	/**
+	 * attempts to create employee account
+	 * @param sc input scanner
+	 * @return String result of what happened
+	 */
 	public static String createEmployeeAccountOption(BufferedReader sc){
 		String username = "";
 		String password = "";
@@ -352,10 +362,63 @@ public class Main {
 		String createEmployeeResult = createEmployee.createEmployeeAccount(username, password);
 		return createEmployeeResult;
 	}
+
+	/**
+	 * Tries to login with username and password input
+	 * 
+	 * @param sc input scanner
+	 * @return integer of employee id
+	 */
 	public static int employeeLoginOption(BufferedReader sc){
-		System.out.println("Employee login option");
-		return 0;
+		int employeeLoggedInId = 0;
+		
+		try{
+			String username, password;
+			System.out.println("Enter username: ");
+			username = sc.readLine();
+			System.out.println("Enter password: ");
+			password = sc.readLine();
+			
+			//tries to login with username and password input
+			Employee loginEmployee = new Employee();
+			String employeeLoginResult = loginEmployee.login(username, password);
+			
+			//check if login result is password incorrect
+			if((employeeLoginResult.equals("Password incorrect."))){
+				System.out.println(employeeLoginResult);
+				employeeLoggedInId = 0;
+			}
+			//check if login result is username not found
+			else if((employeeLoginResult.equals("Username not found."))){
+				System.out.println(employeeLoginResult);
+				employeeLoggedInId = 0;
+			}
+			//check if login result are exceptions
+			else if((employeeLoginResult.equals("General Exception"))){
+				System.out.println("General Exception");
+				employeeLoggedInId = 0;
+			}
+			else if((employeeLoginResult.equals("IO Exception"))){
+				System.out.println("IO Exception");
+				employeeLoggedInId = 0;
+			}
+			else{
+				employeeLoggedInId = Integer.parseInt(employeeLoginResult);//save customerId
+			}
+		}
+		catch(IOException e){
+			System.out.println("test");
+			System.out.println(e);
+		}
+		catch(Exception e){
+			System.out.println(e);
+		}
+		return employeeLoggedInId;
+		
 	}
 	
+	public static void employeeLoggedInMenu(int employeeId, BufferedReader sc){
+		System.out.println("employee logged in menu");
+	}
 	
 }
