@@ -33,7 +33,6 @@ public class MainTest {
 		bw.write("admin:" + "benwebsteradmin".hashCode() + ":" + "benwebsteradmin" + ":" + "password" + ":" + "benwebsteradmin".hashCode());
 		bw.newLine();
 		bw.close();
-		
 	}
 
 	@Test
