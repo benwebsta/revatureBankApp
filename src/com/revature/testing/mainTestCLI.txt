@@ -53,3 +53,11 @@ boblikesunicorns
 2
 1
 300
+5
+benwebsteradmin
+password
+boblikesunicorns
+3
+1
+1
+10
