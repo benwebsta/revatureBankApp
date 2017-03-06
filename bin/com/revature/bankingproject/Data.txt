@@ -1,6 +1,8 @@
 admin:677495928:benwebsteradmin:password:677495928
-
 customer:-1291972862:boblikesunicorns:supersecretpassword:-287807177
 savings:-1291972862:true:55:-287807177
 checking:-1291972862:true:1300:-287807177
-employee:-287807177:benwebster:pass123:-287807177
+employee:-332087845:benwebster2:pass123:-332087845
+customer:972571480:captaininsano:reallygoodpassword:-287807177
+savings:972571480:true:250:-287807177
+checking:972571480:true:800:-287807177

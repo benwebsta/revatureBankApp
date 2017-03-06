@@ -499,7 +499,7 @@ public class Employee {
 	 * @param sc input scanner
 	 * @return true or false depending on approve or decline
 	 */
-	public static boolean approveAccountApplications(String[] account, BufferedReader sc){
+	public boolean approveAccountApplications(String[] account, BufferedReader sc){
 		int response = 0;
 		boolean approve = false;
 
