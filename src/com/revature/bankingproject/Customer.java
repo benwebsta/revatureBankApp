@@ -23,7 +23,7 @@ public class Customer {
 	 *            the password for the account
 	 * @return boolean whether it created account successfully
 	 */
-	public String signUpForServices(String username, String password) {
+	public String signUpForServices(String username, String password, int customerBaseAccount) {
 		String success;// whether the sign up was successful
 
 		// assign instance variables to the input from main
@@ -83,8 +83,15 @@ public class Customer {
 				}
 
 				// add customer account to data with id, username, and password
-				bw.write("customer:" + this.customerId + ":" + username + ":" + password + ":" + "benwebster".hashCode());
-				bw.newLine();
+				if(customerBaseAccount == username.hashCode()){
+					bw.write("customer:" + this.customerId + ":" + username + ":" + password + ":" + "benwebster".hashCode());
+					bw.newLine();
+				}
+				else if(!(customerBaseAccount == username.hashCode())){
+					System.out.println("join account add");
+					bw.write("customer:" + customerBaseAccount + ":" + username + ":" + password + ":" + "benwebster".hashCode());
+					bw.newLine();	
+				}
 				success = "Account created successfully!";
 			} catch (UserExistsException e) {
 				l.error(e);
@@ -603,4 +610,6 @@ public class Customer {
 		
 		return currBalance;
 	}
+
+	
 }

@@ -70791,3 +70791,27 @@
 2017-03-05 22:37:05 INFO  root:332 - deposited money
 2017-03-05 22:37:05 INFO  root:555 - admin logged in
 2017-03-05 22:37:05 INFO  root:332 - deposited money
+2017-03-06 10:43:38 INFO  root:14 - in main
+2017-03-06 10:44:09 INFO  root:147 - customer account created
+2017-03-06 10:44:09 INFO  root:202 - Customer Logged in
+2017-03-06 10:44:09 INFO  root:202 - Customer Logged in
+2017-03-06 10:44:09 INFO  root:389 - created employee account
+2017-03-06 10:44:09 INFO  root:518 - customer approved
+2017-03-06 10:44:09 INFO  root:518 - customer approved
+2017-03-06 10:44:09 INFO  root:202 - Customer Logged in
+2017-03-06 10:44:09 INFO  root:332 - deposited money
+2017-03-06 10:44:09 INFO  root:202 - Customer Logged in
+2017-03-06 10:44:09 INFO  root:356 - Withdrew money
+2017-03-06 10:44:09 INFO  root:202 - Customer Logged in
+2017-03-06 10:44:09 INFO  root:332 - deposited money
+2017-03-06 10:44:09 INFO  root:555 - admin logged in
+2017-03-06 10:44:09 INFO  root:332 - deposited money
+2017-03-06 10:44:09 INFO  root:555 - admin logged in
+2017-03-06 10:44:09 INFO  root:332 - deposited money
+2017-03-06 14:25:16 INFO  root:14 - in main
+2017-03-06 14:44:58 INFO  root:14 - in main
+2017-03-06 14:45:09 INFO  root:211 - Customer Logged in
+2017-03-06 14:46:26 INFO  root:14 - in main
+2017-03-06 14:46:34 INFO  root:211 - Customer Logged in
+2017-03-06 15:00:25 INFO  root:14 - in main
+2017-03-06 15:03:00 INFO  root:211 - Customer Logged in

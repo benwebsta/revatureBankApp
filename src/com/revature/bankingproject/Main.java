@@ -88,6 +88,14 @@ public class Main {
 				}
 				viewCustomerAccounts(sc);
 				break;
+			case 6: 
+				System.out.println("Log in to previously created Customer to add joint account");
+					int customerLoginResult2 = 0;
+					
+					while(customerLoginResult2 == 0)
+						customerLoginResult2 = customerLoginOption(sc);
+					customerLoggedInMenu(customerLoginResult2, sc);
+				break;
 			default:
 				System.out.println("You didn't enter a correct number option");
 				main(null);//give menu options again
@@ -112,6 +120,7 @@ public class Main {
 		System.out.println("3: Employee Sign up");
 		System.out.println("4: Employee Login");
 		System.out.println("5: Admin Login");
+		System.out.println("6: Create joint account with existing user");
 	}
 	
 	/**
@@ -143,7 +152,7 @@ public class Main {
 		
 		//call sign up method from Customer class
 		Customer createCustomer = new Customer();
-		String createAccountResult = createCustomer.signUpForServices(username, password);
+		String createAccountResult = createCustomer.signUpForServices(username, password, username.hashCode());
 		l.info("customer account created");
 		return createAccountResult;
 	}
@@ -214,6 +223,7 @@ public class Main {
 		System.out.println("1: Sign up for Savings Acccount");
 		System.out.println("2: Sign up for Checking Account");
 		System.out.println("3: View Accounts");
+		System.out.println("4: Add joint account");
 	}
 
 	/**
@@ -290,8 +300,15 @@ public class Main {
 					withdrawMoney(customerId, sc, accountType);
 				else
 					System.out.println("not a correct option");
-				
-				
+				break;
+			case 4:
+				String username, password;
+				System.out.println("Username for joint account:");
+				username = sc.readLine();
+				System.out.println("Password for joint account");
+				password = sc.readLine();
+				Customer jointAccount = new Customer();
+				jointAccount.signUpForServices(username, password, customerId);
 				break;
 			default:
 				System.out.println("Not a valid option");

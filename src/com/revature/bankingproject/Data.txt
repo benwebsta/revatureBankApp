@@ -9,3 +9,4 @@ checking:972571480:true:800:-287807177
 employee:-287807177:benwebster:uncommonpassword:-287807177
 customer:102246906:hillybilly:ilovebeer:-287807177
 savings:102246906:true:0:-287807177
+customer:-1291972862:jointaccount:testpass:-287807177
