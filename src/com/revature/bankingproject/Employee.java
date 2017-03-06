@@ -7,8 +7,10 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import org.apache.log4j.Logger;
+
 public class Employee {
-	
+	static final Logger l =  Logger.getRootLogger();
 	private int employeeId;
 	
 	/**
@@ -79,12 +81,15 @@ public class Employee {
 				bw.newLine();
 				success = "Account created successfully!";
 			} catch (UserExistsException e) {
+				l.error(e);
 				success = e.getMessage();
 			}
 		} catch (IOException e) {
+			l.error(e);
 			success = "Unable to create account.";
 			System.out.println("IO Exception");
 		} catch (Exception e) {
+			l.error(e);
 			success = "Unable to create account.";
 			System.out.println("General Exception");
 		}
@@ -188,9 +193,11 @@ public class Employee {
 				}
 			}
 		} catch (IOException e) {
+			l.error(e);
 			success = "IO Exception";
 			System.out.println("IO Exception");
 		} catch (Exception e) {
+			l.error(e);
 			success = "General Exception";
 			System.out.println("General Exception");
 		}
@@ -375,8 +382,10 @@ public class Employee {
 			
 		}
 		 catch (IOException e) {
+			 l.error(e);
 			System.out.println("IO Exception");
 		} catch (Exception e) {
+			l.error(e);
 			System.out.println("General Exception");
 		}
 			
@@ -471,6 +480,7 @@ public class Employee {
 					bw2.close();
 				}
 				catch(IOException e){
+					l.error(e);
 					System.out.println(e);
 				}
 			}
@@ -485,6 +495,7 @@ public class Employee {
 					bw2.close();
 				}
 				catch(IOException e){
+					l.error(e);
 					System.out.println(e);
 				}
 			}
@@ -512,6 +523,7 @@ public class Employee {
 			response = Integer.parseInt(sc.readLine());
 		}
 		catch(IOException e){
+			l.error(e);
 			System.out.println(e);
 		}
 		

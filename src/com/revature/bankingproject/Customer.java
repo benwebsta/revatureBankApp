@@ -7,8 +7,10 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 
-public class Customer {
+import org.apache.log4j.Logger;
 
+public class Customer {
+	static final Logger l =  Logger.getRootLogger();
 	private int customerId;// customerId for uniqueness
 
 	/**
@@ -85,12 +87,15 @@ public class Customer {
 				bw.newLine();
 				success = "Account created successfully!";
 			} catch (UserExistsException e) {
+				l.error(e);
 				success = e.getMessage();
 			}
 		} catch (IOException e) {
+			l.error(e);
 			success = "Unable to create account.";
 			System.out.println("IO Exception");
 		} catch (Exception e) {
+			l.error(e);
 			success = "Unable to create account.";
 			System.out.println("General Exception");
 		}
@@ -194,9 +199,11 @@ public class Customer {
 				}
 			}
 		} catch (IOException e) {
+			l.error(e);
 			success = "IO Exception";
 			System.out.println("IO Exception");
 		} catch (Exception e) {
+			l.error(e);
 			success = "General Exception";
 			System.out.println("General Exception");
 		}
@@ -267,10 +274,12 @@ public class Customer {
 			}
 		}
 		 catch (IOException e) {
+			 	l.error(e);
 				success = "Unable to create account.";
 				System.out.println("IO Exception");
 				success = "IO Exception";
 			} catch (Exception e) {
+				l.error(e);
 				success = "Unable to create account.";
 				System.out.println("General Exception");
 				success = "General Exception";
@@ -342,10 +351,12 @@ public class Customer {
 			
 		}
 		 catch (IOException e) {
+			 	l.error(e);
 				success = "Unable to create account.";
 				System.out.println("IO Exception");
 				success = "IO Exception";
 			} catch (Exception e) {
+				l.error(e);
 				success = "Unable to create account.";
 				System.out.println("General Exception");
 				success = "General Exception";
@@ -425,8 +436,10 @@ public class Customer {
 			if(!accountFound)
 				System.out.println("No Accounts Found");
 		} catch (IOException e) {
+			l.error(e);
 			System.out.println("IO Exception");
 		} catch (Exception e) {
+			l.error(e);
 			System.out.println("General Exception");
 		}
 
@@ -502,8 +515,10 @@ public class Customer {
 			
 		}
 		 catch (IOException e) {
+			 l.error(e);
 			System.out.println("IO Exception");
 		} catch (Exception e) {
+			l.error(e);
 			System.out.println("General Exception");
 		}
 		
@@ -579,8 +594,10 @@ public class Customer {
 			
 		}
 		 catch (IOException e) {
+			 l.error(e);
 			System.out.println("IO Exception");
 		} catch (Exception e) {
+			l.error(e);
 			System.out.println("General Exception");
 		}
 		

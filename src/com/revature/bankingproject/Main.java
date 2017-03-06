@@ -95,7 +95,7 @@ public class Main {
 			}
 		}
 		catch(Exception e){
-			System.out.println(e);
+			l.error(e);
 			System.out.println("General Exception");
 		}
 	}
@@ -133,7 +133,7 @@ public class Main {
 			password = sc.readLine();
 		}
 		catch(IOException e){
-			l.equals(e);
+			l.error(e);
 			System.out.println(e);
 		}
 		catch(Exception e){
@@ -299,9 +299,11 @@ public class Main {
 			}
 		}
 		catch(IOException e){
+			l.error(e);
 			System.out.println(e);
 		}
 		catch(Exception e){
+			l.error(e);
 			System.out.println(e);
 		}
 		
@@ -322,6 +324,7 @@ public class Main {
 			amount = Integer.parseInt(sc.readLine());
 		}
 		catch(IOException e){
+			l.error(e);
 			System.out.println("IO Exception");
 		}
 		
@@ -345,6 +348,7 @@ public class Main {
 			amount = Integer.parseInt(sc.readLine());
 		}
 		catch(IOException e){
+			l.error(e);
 			System.out.println("IO Exception");
 		}
 		
@@ -371,9 +375,11 @@ public class Main {
 			password = sc.readLine();
 		}
 		catch(IOException e){
+			l.error(e);
 			System.out.println(e);
 		}
 		catch(Exception e){
+			l.error(e);
 			System.out.println(e);
 		}
 		
@@ -428,10 +434,11 @@ public class Main {
 			}
 		}
 		catch(IOException e){
-			System.out.println("test");
+			l.error(e);
 			System.out.println(e);
 		}
 		catch(Exception e){
+			l.error(e);
 			System.out.println(e);
 		}
 		return employeeLoggedInId;
@@ -484,9 +491,11 @@ public class Main {
 			}
 		}
 		catch(IOException e){
+			l.error(e);
 			System.out.println(e);
 		}
 		catch(Exception e){
+			l.error(e);
 			System.out.println(e);
 		}
 	}
@@ -536,9 +545,11 @@ public class Main {
 			
 		}
 		catch(IOException e){
+			l.error(e);
 			System.out.println(e);
 		}
 		catch(Exception e){
+			l.error(e);
 			System.out.println(e);
 		}
 		l.info("admin logged in");
@@ -556,6 +567,7 @@ public class Main {
 			customerUsername = sc.readLine();
 		}
 		catch(IOException e){
+			l.error(e);
 			System.out.println(e);
 		}
 		Admin customerId = new Admin();

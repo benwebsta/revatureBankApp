@@ -6,8 +6,10 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 
+import org.apache.log4j.Logger;
+
 public class Admin{
-	
+	static final Logger l =  Logger.getRootLogger();
 	/**
 	 * Check for username and password, return true if admin logs in
 	 * @param username
@@ -98,9 +100,11 @@ public class Admin{
 				}
 			}
 		} catch (IOException e) {
+			l.error(e);
 			success = false;
 			System.out.println("IO Exception");
 		} catch (Exception e) {
+			l.error(e);
 			success = false;
 			System.out.println("General Exception");
 		}
@@ -166,8 +170,10 @@ public class Admin{
 				}
 			}
 		} catch (IOException e) {
+			l.error(e);
 			System.out.println("IO Exception");
 		} catch (Exception e) {
+			l.error(e);
 			System.out.println("General Exception");
 		}
 		return "";
