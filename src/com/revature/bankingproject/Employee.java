@@ -6,6 +6,8 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import org.apache.log4j.Logger;
 
@@ -541,4 +543,60 @@ public class Employee {
 		}
 		return approve;
 	}
+
+	public void calculator(BufferedReader sc){
+		
+		System.out.println("   Tiny Calculator " );
+		System.out.println("  -----------------");
+		System.out.println("|   7   8   9   /  |");
+		System.out.println("|   4   5   6   x  |");
+		System.out.println("|   1   2   3   -  |");
+		System.out.println("|   0   .   +   =  |");
+		System.out.println("  -----------------\n");
+		System.out.println("Type your operations (Parentheses are okay)");
+		
+		boolean calculateMore = true;
+		while(calculateMore){
+			
+			String calculateString = "5 * 50 3 / 3 1*10";
+			findMultiplications( calculateString );
+			
+			calculateMore = false;
+		}
+	}
+	
+	
+    public void findMultiplications( String calculateString ) {
+
+        Pattern multiplicationPattern = Pattern.compile( "\\d+\\s*\\|/|*|-|+|\\s*\\d+" );
+
+        Matcher multiplicationMather = multiplicationPattern.matcher( calculateString );
+
+        while ( multiplicationMather.find() ) {
+        	if(multiplicationMather.group().length() != 0){
+        		multiplicationMather.group().trim();
+                int int1 = multiplicationMather.start();
+                int int2 = multiplicationMather.end();
+                
+                System.out.println(int1 +" " + int2);
+        	}
+
+
+        }
+    }
+    
+    static int add(int int1, int int2) {
+        return int1 + int2;
+    }
+    static int subtract(int int1, int int2) {
+        return int1 - int2;
+    }
+    static int multiply(int int1, int int2) {
+        return int1 * int2;
+    }
+    static int divide(int int1, int int2) {
+        return int1 / int2;
+    }
+
+
 }

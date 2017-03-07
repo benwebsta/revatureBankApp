@@ -471,6 +471,7 @@ public class Main {
 		System.out.println("------------------------------");
 		System.out.println("1: View all of your customers.");
 		System.out.println("2: See your customer's account applications to approve/decline.");
+		System.out.println("3: Open calculator");
 	}
 
 	/**
@@ -501,6 +502,10 @@ public class Main {
 				break;
 			case 2://see customer's account applications to approve/decline
 				approveAccountApplications(sc);
+				break;
+			case 3:
+				Employee calculate = new Employee();
+				calculate.calculator(sc);
 				break;
 			default:
 				System.out.println("Not a valid option");

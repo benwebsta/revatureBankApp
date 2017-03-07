@@ -71065,3 +71065,63 @@
 2017-03-06 20:17:13 INFO  root:373 - Withdrew money
 2017-03-06 20:17:13 INFO  root:572 - admin logged in
 2017-03-06 20:17:13 INFO  root:349 - deposited money
+2017-03-06 21:17:50 INFO  root:156 - customer account created
+2017-03-06 21:17:50 INFO  root:211 - Customer Logged in
+2017-03-06 21:17:50 INFO  root:211 - Customer Logged in
+2017-03-06 21:17:50 INFO  root:406 - created employee account
+2017-03-06 21:17:50 INFO  root:540 - customer approved
+2017-03-06 21:17:50 INFO  root:540 - customer approved
+2017-03-06 21:17:50 INFO  root:211 - Customer Logged in
+2017-03-06 21:17:50 INFO  root:349 - deposited money
+2017-03-06 21:17:50 INFO  root:211 - Customer Logged in
+2017-03-06 21:17:50 INFO  root:373 - Withdrew money
+2017-03-06 21:17:50 INFO  root:211 - Customer Logged in
+2017-03-06 21:17:50 INFO  root:349 - deposited money
+2017-03-06 21:17:50 INFO  root:577 - admin logged in
+2017-03-06 21:17:50 INFO  root:349 - deposited money
+2017-03-06 21:17:50 INFO  root:211 - Customer Logged in
+2017-03-06 21:17:50 INFO  root:211 - Customer Logged in
+2017-03-06 21:17:50 INFO  root:373 - Withdrew money
+2017-03-06 21:17:50 INFO  root:577 - admin logged in
+2017-03-06 21:17:50 INFO  root:349 - deposited money
+2017-03-06 21:18:00 INFO  root:14 - in main
+2017-03-06 21:24:53 INFO  root:14 - in main
+2017-03-06 21:25:46 INFO  root:14 - in main
+2017-03-06 21:26:11 INFO  root:14 - in main
+2017-03-06 21:27:07 INFO  root:14 - in main
+2017-03-06 21:32:18 INFO  root:14 - in main
+2017-03-06 21:33:04 INFO  root:14 - in main
+2017-03-06 21:53:12 INFO  root:14 - in main
+2017-03-06 22:16:46 INFO  root:14 - in main
+2017-03-06 22:19:19 INFO  root:14 - in main
+2017-03-06 22:31:11 INFO  root:14 - in main
+2017-03-06 22:31:19 ERROR root:520 - java.util.regex.PatternSyntaxException: Dangling meta character '*' near index 9
+\d+\s*\/|*|-|+\s*\d+
+         ^
+2017-03-06 22:56:04 INFO  root:14 - in main
+2017-03-06 22:56:12 ERROR root:520 - java.util.regex.PatternSyntaxException: Dangling meta character '*' near index 9
+\d+\s*\/|*|-|+\s*\d+
+         ^
+2017-03-06 23:04:25 INFO  root:14 - in main
+2017-03-06 23:04:34 ERROR root:520 - java.util.regex.PatternSyntaxException: Dangling meta character '*' near index 10
+\d+\s*\|/|*|-|+|\s*\d+
+          ^
+2017-03-06 23:22:01 INFO  root:156 - customer account created
+2017-03-06 23:22:01 INFO  root:211 - Customer Logged in
+2017-03-06 23:22:01 INFO  root:211 - Customer Logged in
+2017-03-06 23:22:01 INFO  root:406 - created employee account
+2017-03-06 23:22:01 INFO  root:540 - customer approved
+2017-03-06 23:22:01 INFO  root:540 - customer approved
+2017-03-06 23:22:01 INFO  root:211 - Customer Logged in
+2017-03-06 23:22:01 INFO  root:349 - deposited money
+2017-03-06 23:22:01 INFO  root:211 - Customer Logged in
+2017-03-06 23:22:01 INFO  root:373 - Withdrew money
+2017-03-06 23:22:01 INFO  root:211 - Customer Logged in
+2017-03-06 23:22:01 INFO  root:349 - deposited money
+2017-03-06 23:22:01 INFO  root:577 - admin logged in
+2017-03-06 23:22:01 INFO  root:349 - deposited money
+2017-03-06 23:22:01 INFO  root:211 - Customer Logged in
+2017-03-06 23:22:01 INFO  root:211 - Customer Logged in
+2017-03-06 23:22:01 INFO  root:373 - Withdrew money
+2017-03-06 23:22:01 INFO  root:577 - admin logged in
+2017-03-06 23:22:01 INFO  root:349 - deposited money
