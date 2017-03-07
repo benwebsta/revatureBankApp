@@ -81,7 +81,7 @@ public class Customer {
 						}
 					}
 				}
-
+				
 				// add customer account to data with id, username, and password
 				if(customerBaseAccount == username.hashCode()){
 					bw.write("customer:" + this.customerId + ":" + username + ":" + password + ":" + "benwebster".hashCode());

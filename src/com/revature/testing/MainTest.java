@@ -51,13 +51,16 @@ public class MainTest {
 			mainMenuOption(br);
 			mainMenuOption(br);
 			mainMenuOption(br);
+			mainMenuOption(br);
+			mainMenuOption(br);
 			
 			Customer viewAccounts = new Customer();
 			ArrayList<String> viewAccountsResult = viewAccounts.getAccountsForCustomer("boblikesunicorns".hashCode());	
 			assertEquals("savings", viewAccountsResult.get(0));
 			assertEquals("$55", viewAccountsResult.get(1));
 			assertEquals("checking", viewAccountsResult.get(2));
-			assertEquals("$1300", viewAccountsResult.get(3));
+			System.out.println(viewAccountsResult.get(3));
+			assertEquals("$1150", viewAccountsResult.get(3));
 			
 			//test admin login and admin priveledges
 			mainMenuOption(br);

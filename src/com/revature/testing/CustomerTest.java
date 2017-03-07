@@ -29,7 +29,7 @@ public class CustomerTest {
 			Customer customer = new Customer();
 			String username = br.readLine();
 			String password = br.readLine();
-			String createCustomer = customer.signUpForServices(username, password);
+			String createCustomer = customer.signUpForServices(username, password, username.hashCode());
 			assertEquals("Account created successfully!", createCustomer);
 
 			//test login with a customer username and password

@@ -85,7 +85,7 @@ public class EmployeeTest {
 			Customer newCustomer = new Customer();
 			String newCustomerUsername = br.readLine();
 			String newCustomerPassword = br.readLine();
-			newCustomer.signUpForServices(newCustomerUsername, newCustomerPassword);
+			newCustomer.signUpForServices(newCustomerUsername, newCustomerPassword, newCustomerUsername.hashCode());
 			newCustomer.signUpForSavingsAccount(newCustomerUsername.hashCode());
 			
 			String[] getAccountApplications = employee.getAccountApplications(br);
