@@ -88,7 +88,6 @@ public class Customer {
 					bw.newLine();
 				}
 				else if(!(customerBaseAccount == username.hashCode())){
-					System.out.println("join account add");
 					bw.write("customer:" + customerBaseAccount + ":" + username + ":" + password + ":" + "benwebster".hashCode());
 					bw.newLine();	
 				}
